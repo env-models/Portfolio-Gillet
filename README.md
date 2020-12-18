@@ -1,6 +1,8 @@
-# first_try
+# Data Science projects - Raphaël GILLET
 
 
-First things despayed on Github Page
+Here is a collection of notebooks advertising my abilities to handle various scientific datasets
 
-[azerty](https://nbviewer.jupyter.org/github/env-models/Beach_erosion/blob/master/Storm%20Impact%20Indicator.ipynb)
+
+[Beach Erosion](https://nbviewer.jupyter.org/github/env-models/Beach_erosion/blob/master/Storm%20Impact%20Indicator.ipynb)
+
