@@ -1,6 +1,3 @@
-# Data Science projects - Raphaël GILLET
-
-
 ### Here is a collection of notebooks advertising my abilities to handle various scientific datasets
 <br>
 <br>
