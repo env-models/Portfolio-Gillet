@@ -11,6 +11,6 @@ As the storm induced erosion processes are still a research topic, this analysis
 
 ## Genetic engineering - Finding lab of origin for various plasmides using Sequential Neural Network
 
-[nbviewer](https://nbviewer.jupyter.org/github/env-models/Genetic_engineering/blob/main/Genetic%20Engineering.ipynb)
+[nbviewer](https://nbviewer.jupyter.org/github/env-models/Genetic_engineering/blob/main/Genetic%20Engineering_01_21.ipynb)
 
 
