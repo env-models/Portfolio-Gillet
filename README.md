@@ -15,3 +15,10 @@ As the storm induced erosion processes are still a research topic, this analysis
 [nbviewer](https://nbviewer.jupyter.org/github/env-models/Genetic_engineering/blob/main/gen_eng_final.ipynb)
 
 
+
+
+Publication list :
+-
+-
+-
+blbla
