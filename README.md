@@ -18,7 +18,7 @@ As the storm induced erosion processes are still a research topic, this analysis
 
 
 Publication list :
--
--
--
-blbla
+
+- Gillet R. & al., 2018. Towards the developpment of a storm erosion Early Warning System for the French Aquitanian coast. Proceedings from the International Coastal Symposium (ICS) 2018 (Busan, Repblic of Korea). Journal of Coastal Research.
+
+- Henaff Q., Arnaud-Fassetta G., Beltrando G., Gillet R., 2014. A comparative hydro-morphometric approach for modelling rainfall variability impact during hydrological extremes : Application to 2002 and 2003 catastrophic events in the Lower Rhône valley, France. European Geosciences Union General Assembly. (Vienna, Austria)
