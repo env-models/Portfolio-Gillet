@@ -25,6 +25,7 @@ NODES=(
     "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
     "https://github.com/cubiq/ComfyUI_InstantID"
     "https://github.com/cubiq/ComfyUI_FaceAnalysis"
+    "https://github.com/Gourieff/comfyui-reactor-node"
 )
 
 CHECKPOINT_MODELS=(
