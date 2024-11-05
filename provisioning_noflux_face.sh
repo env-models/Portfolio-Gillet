@@ -26,6 +26,7 @@ NODES=(
     "https://github.com/cubiq/ComfyUI_InstantID"
     "https://github.com/cubiq/ComfyUI_FaceAnalysis"
     "https://github.com/Gourieff/comfyui-reactor-node"
+    "https://github.com/BlenderNeko/ComfyUI_Noise"
 )
 
 CHECKPOINT_MODELS=(
@@ -39,6 +40,7 @@ UNET_MODELS=(
     # flux1-dev.safetensors
    # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
     "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
+    "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
 
 )
 
