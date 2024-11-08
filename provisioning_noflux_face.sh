@@ -31,16 +31,17 @@ NODES=(
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
-    "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+    # #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
+    # "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
+    # "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+    "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
+    "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
+
 )
 
 UNET_MODELS=(
     # flux1-dev.safetensors
    # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
-    "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
-    "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
 
 )
 
@@ -128,23 +129,24 @@ function provisioning_start() {
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
-    
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/INSIGHTFACE" \
+        "${WORKSPACE}/storage/stable_diffusion/models/insightface" \
         "${INSIGHTFACE[@]}"
-
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/FACESTORE_MODELS" \
+        "${WORKSPACE}/storage/stable_diffusion/models/facestore_models" \
         "${FACESTORE_MODELS[@]}"
-
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/FACEDETECTION" \
+        "${WORKSPACE}/storage/stable_diffusion/models/facedetection" \
         "${FACEDETECTION[@]}"
-
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/IPADAPTER" \
+        "${WORKSPACE}/storage/stable_diffusion/models/ipadapter" \
         "${IPADAPTER[@]}"
-        
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/clip" \
+        "${CLIP[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/clip_vision" \
+        "${CLIP_VISION[@]}"
     provisioning_print_end
 }
 
