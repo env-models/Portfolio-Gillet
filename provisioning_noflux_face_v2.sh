@@ -103,6 +103,11 @@ IPADAPTER=(
     "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus-face_sdxl_vit-h.safetensors"
 )
 
+IPADAPTER=(
+"https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/2d106det.onnx"
+)
+
+
 
 CONTROLNET_MODELS=(
     "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors"
