@@ -41,12 +41,13 @@ CHECKPOINT_MODELS=(
 UNET_MODELS=(
     # flux1-dev.safetensors
    # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
-    "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
-
+    # "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
+    "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
 )
 
 LORA_MODELS=(
-    "https://civitai.com/api/download/models/16576"
+    # "https://civitai.com/api/download/models/16576"
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15_lora.safetensors"
 )
 
 VAE_MODELS=(
@@ -235,10 +236,10 @@ function provisioning_get_models() {
         
         # Check if directory is specifically for CLIP_VISION
         if [[ "$dir" == *"clip_vision"* ]]; then
-            # Custom filename for clip_vision models
-            # filename="clip_vision_model.safetensors"
-            filename="CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
-            provisioning_download "${url}" "${dir}/${filename}"
+
+            # Extract the desired part of the URL for the filename
+            base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
+            provisioning_download "${url}" "${dir}/${base_name}"
         else
             # Default download for other directories
             provisioning_download "${url}" "${dir}"
