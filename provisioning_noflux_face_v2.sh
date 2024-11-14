@@ -103,8 +103,13 @@ IPADAPTER=(
     "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus-face_sdxl_vit-h.safetensors"
 )
 
-IPADAPTER=(
+INSIGHTFACE=(
+"https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/1k3d68.onnx"
 "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/2d106det.onnx"
+"https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/det_10g.onnx"
+"https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/genderage.onnx"
+"https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/w600k_r50.onnx"
+
 )
 
 
@@ -169,6 +174,10 @@ function provisioning_start() {
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/clip_vision" \
         "${CLIP_VISION[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/insightface" \
+        "${INSIGHTFACE[@]}"
+        
     provisioning_print_end
 }
 
