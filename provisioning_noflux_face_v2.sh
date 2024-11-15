@@ -27,6 +27,7 @@ NODES=(
     "https://github.com/cubiq/ComfyUI_FaceAnalysis"
     "https://github.com/Gourieff/comfyui-reactor-node"
     "https://github.com/BlenderNeko/ComfyUI_Noise"
+    "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
 )
 
 CHECKPOINT_MODELS=(
@@ -35,6 +36,7 @@ CHECKPOINT_MODELS=(
     # "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
     # "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
     "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
+    "https://huggingface.co/Lykon/dreamshaper-xl-v2-turbo/resolve/main/DreamShaperXL_Turbo_v2.safetensors"
     "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
 
 
@@ -125,6 +127,12 @@ CONTROLNET_MODELS=(
     # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
 )
 
+ULTRALYTICS={
+"https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"
+"https://huggingface.co/Bingsu/adetailer/resolve/main/hand_yolov8s.pt"
+
+}
+
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
@@ -177,7 +185,9 @@ function provisioning_start() {
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/insightface" \
         "${INSIGHTFACE[@]}"
-        
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/ultralytics" \
+        "${ULTRALYTICS[@]}"
     provisioning_print_end
 }
 
@@ -252,32 +262,75 @@ function provisioning_get_default_workflow() {
 #     done
 # }
 
+# function provisioning_get_models() {
+#     if [[ -z $2 ]]; then return 1; fi
+
+#     dir="$1"
+#     mkdir -p "$dir"
+#     shift
+#     arr=("$@")
+
+#     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+#     for url in "${arr[@]}"; do
+#         printf "Downloading: %s\n" "${url}"
+        
+#         # Check if directory is specifically for CLIP_VISION
+#         if [[ "$dir" == *"clip_vision"* ]]; then
+
+#             # Extract the desired part of the URL for the filename
+#             base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
+#             provisioning_download "${url}" "${dir}/${base_name}"
+#         else
+#             # Default download for other directories
+#             provisioning_download "${url}" "${dir}"
+#         fi
+
+#         printf "\n"
+#     done
+# }
+
+
+
 function provisioning_get_models() {
     if [[ -z $2 ]]; then return 1; fi
 
     dir="$1"
-    mkdir -p "$dir"
     shift
     arr=("$@")
 
     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+    
+    # Loop through each URL to download
     for url in "${arr[@]}"; do
         printf "Downloading: %s\n" "${url}"
         
-        # Check if directory is specifically for CLIP_VISION
-        if [[ "$dir" == *"clip_vision"* ]]; then
+        # Check if "ultralytics" is in the directory name
+        if [[ "$dir" == *"ultralytics"* ]]; then
+            target_dir="${dir}/bbox"
+        else
+            target_dir="$dir"
+        fi
 
+        # Ensure the target directory exists
+        mkdir -p "$target_dir"
+
+        # Special handling for "clip_vision"
+        if [[ "$dir" == *"clip_vision"* ]]; then
             # Extract the desired part of the URL for the filename
             base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
-            provisioning_download "${url}" "${dir}/${base_name}"
+            provisioning_download "${url}" "${target_dir}/${base_name}"
         else
             # Default download for other directories
-            provisioning_download "${url}" "${dir}"
+            provisioning_download "${url}" "${target_dir}"
         fi
 
         printf "\n"
     done
 }
+
+
+
+
 
 
 
