@@ -127,11 +127,10 @@ CONTROLNET_MODELS=(
     # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
 )
 
-ULTRALYTICS={
+ULTRALYTICS=(
 "https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"
 "https://huggingface.co/Bingsu/adetailer/resolve/main/hand_yolov8s.pt"
-
-}
+)
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
@@ -247,6 +246,7 @@ function provisioning_get_default_workflow() {
     fi
 }
 
+# ### FUNCTION 1
 # function provisioning_get_models() {
 #     if [[ -z $2 ]]; then return 1; fi
     
@@ -262,71 +262,73 @@ function provisioning_get_default_workflow() {
 #     done
 # }
 
-# function provisioning_get_models() {
-#     if [[ -z $2 ]]; then return 1; fi
-
-#     dir="$1"
-#     mkdir -p "$dir"
-#     shift
-#     arr=("$@")
-
-#     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
-#     for url in "${arr[@]}"; do
-#         printf "Downloading: %s\n" "${url}"
-        
-#         # Check if directory is specifically for CLIP_VISION
-#         if [[ "$dir" == *"clip_vision"* ]]; then
-
-#             # Extract the desired part of the URL for the filename
-#             base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
-#             provisioning_download "${url}" "${dir}/${base_name}"
-#         else
-#             # Default download for other directories
-#             provisioning_download "${url}" "${dir}"
-#         fi
-
-#         printf "\n"
-#     done
-# }
-
-
-
+### FUNCTION 2
 function provisioning_get_models() {
     if [[ -z $2 ]]; then return 1; fi
 
     dir="$1"
+    mkdir -p "$dir"
     shift
     arr=("$@")
 
     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
-    
-    # Loop through each URL to download
     for url in "${arr[@]}"; do
         printf "Downloading: %s\n" "${url}"
         
-        # Check if "ultralytics" is in the directory name
-        if [[ "$dir" == *"ultralytics"* ]]; then
-            target_dir="${dir}/bbox"
-        else
-            target_dir="$dir"
-        fi
-
-        # Ensure the target directory exists
-        mkdir -p "$target_dir"
-
-        # Special handling for "clip_vision"
+        # Check if directory is specifically for CLIP_VISION
         if [[ "$dir" == *"clip_vision"* ]]; then
+
             # Extract the desired part of the URL for the filename
             base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
-            provisioning_download "${url}" "${target_dir}/${base_name}"
+            provisioning_download "${url}" "${dir}/${base_name}"
         else
             # Default download for other directories
-            provisioning_download "${url}" "${target_dir}"
+            provisioning_download "${url}" "${dir}"
         fi
 
         printf "\n"
     done
 }
+
+
+### FUNCTION 3
+
+# function provisioning_get_models() {
+#     if [[ -z $2 ]]; then return 1; fi
+
+#     dir="$1"
+#     shift
+#     arr=("$@")
+
+#     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+    
+#     # Loop through each URL to download
+#     for url in "${arr[@]}"; do
+#         printf "Downloading: %s\n" "${url}"
+        
+#         # Check if "ultralytics" is in the directory name
+#         if [[ "$dir" == *"ultralytics"* ]]; then
+#             target_dir="${dir}/bbox"
+#         else
+#             target_dir="$dir"
+#         fi
+
+#         # Ensure the target directory exists
+#         mkdir -p "$target_dir"
+
+#         # Special handling for "clip_vision"
+#         if [[ "$dir" == *"clip_vision"* ]]; then
+#             # Extract the desired part of the URL for the filename
+#             base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
+#             provisioning_download "${url}" "${target_dir}/${base_name}"
+#         else
+#             # Default download for other directories
+#             provisioning_download "${url}" "${target_dir}"
+#         fi
+
+#         printf "\n"
+#     done
+# }
 
 
 
