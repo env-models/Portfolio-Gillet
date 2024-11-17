@@ -274,19 +274,18 @@ function provisioning_get_models() {
     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
     for url in "${arr[@]}"; do
         printf "Downloading: %s\n" "${url}"
-        
+
+
         # Check if directory is specifically for CLIP_VISION
         if [[ "$dir" == *"clip_vision"* ]]; then
-             printf "Downloading and RENAMING CLIP Model"
+             printf "Downloading and RENAMING CLIP Model\n"
 
-            # Extract the desired part of the URL for the filename
-            base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
-            printf "New basename: %s\n" "${base_name}"
-             
-            provisioning_download "${url}" "${dir}/${base_name}"
-            # base_name="CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
-            # # Ensure correct download location and rename
-            # provisioning_download "${url}" "${dir}/${base_name}"
+            # Explicitly define the desired filename
+            target_file="${dir}/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+
+            # Use wget with -O to save the file directly
+            wget -qnc  --show-progress -e dotbytes="${3:-4M}" -O "$target_file" "${url}"
+
             
         else
             # Default download for other directories
