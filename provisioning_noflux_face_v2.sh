@@ -277,9 +277,12 @@ function provisioning_get_models() {
         
         # Check if directory is specifically for CLIP_VISION
         if [[ "$dir" == *"clip_vision"* ]]; then
+             printf "Downloading and RENAMING CLIP Model"
 
             # Extract the desired part of the URL for the filename
             base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
+            printf "New basename: %s\n" "${base_name}"
+             
             provisioning_download "${url}" "${dir}/${base_name}"
             # base_name="CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
             # # Ensure correct download location and rename
