@@ -279,11 +279,11 @@ function provisioning_get_models() {
         if [[ "$dir" == *"clip_vision"* ]]; then
 
             # Extract the desired part of the URL for the filename
-            # base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
-            # provisioning_download "${url}" "${dir}/${base_name}"
-            base_name="CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
-            # Ensure correct download location and rename
+            base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
             provisioning_download "${url}" "${dir}/${base_name}"
+            # base_name="CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+            # # Ensure correct download location and rename
+            # provisioning_download "${url}" "${dir}/${base_name}"
             
         else
             # Default download for other directories
