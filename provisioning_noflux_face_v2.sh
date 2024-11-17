@@ -51,8 +51,8 @@ UNET_MODELS=(
 
 LORA_MODELS=(
     # "https://civitai.com/api/download/models/16576"
-    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15_lora.safetensors"
-    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15_lora.safetensors"
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15_lora.safetensors"
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15_lora.safetensors"
 )
 
 VAE_MODELS=(
@@ -92,44 +92,41 @@ IPADAPTER=(
     "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
     "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
     "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors"
-
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-portrait_sdxl.bin"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
-    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15.binx"
-    
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15_light_v11.bin"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter_sdxl_vit-h.safetensors"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15.binx"    
+    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15_light_v11.bin"
+    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors"
+    "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter_sdxl_vit-h.safetensors"
+    "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
     "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus-face_sdxl_vit-h.safetensors"
 )
 
 INSIGHTFACE=(
-"https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/1k3d68.onnx"
-"https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/2d106det.onnx"
-"https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/det_10g.onnx"
-"https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/genderage.onnx"
-"https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/w600k_r50.onnx"
-
+    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/1k3d68.onnx"
+    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/2d106det.onnx"
+    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/det_10g.onnx"
+    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/genderage.onnx"
+    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/w600k_r50.onnx"
 )
 
 
 
 CONTROLNET_MODELS=(
     "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors"
-    # "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors?download"
-    # "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_diffusers_xl_openpose.safetensors"
-    # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
-    # "https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_depth_fp16.safetensors"
-    # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
-    # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
-    # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
+    "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors?download"
+    "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_diffusers_xl_openpose.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
+    "https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_depth_fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
 )
 
 ULTRALYTICS=(
-# "https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"
-# "https://huggingface.co/Bingsu/adetailer/resolve/main/hand_yolov8s.pt"
+"https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"
+"https://huggingface.co/Bingsu/adetailer/resolve/main/hand_yolov8s.pt"
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
@@ -262,7 +259,42 @@ function provisioning_get_models() {
     done
 }
 
-## FUNCTION 2
+# ## FUNCTION 2
+# function provisioning_get_models() {
+#     if [[ -z $2 ]]; then return 1; fi
+
+#     dir="$1"
+#     mkdir -p "$dir"
+#     shift
+#     arr=("$@")
+
+#     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+#     for url in "${arr[@]}"; do
+#         printf "Downloading: %s\n" "${url}"
+
+
+#         # Check if directory is specifically for CLIP_VISION
+#         if [[ "$dir" == *"clip_vision"* ]]; then
+#              printf "Downloading and RENAMING CLIP Model\n"
+
+#             # Explicitly define the desired filename
+#             target_file="${dir}/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+
+#             # Use wget with -O to save the file directly
+#             wget -qnc  --show-progress -e dotbytes="${3:-4M}" -O "$target_file" "${url}"
+
+            
+#         else
+#             # Default download for other directories
+#             provisioning_download "${url}" "${dir}"
+#         fi
+
+#         printf "\n"
+#     done
+# }
+
+
+### FUNCTION 3
 function provisioning_get_models() {
     if [[ -z $2 ]]; then return 1; fi
 
@@ -272,10 +304,10 @@ function provisioning_get_models() {
     arr=("$@")
 
     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+    
     for url in "${arr[@]}"; do
         printf "Downloading: %s\n" "${url}"
-
-
+        
         # Check if directory is specifically for CLIP_VISION
         if [[ "$dir" == *"clip_vision"* ]]; then
              printf "Downloading and RENAMING CLIP Model\n"
@@ -286,54 +318,20 @@ function provisioning_get_models() {
             # Use wget with -O to save the file directly
             wget -qnc  --show-progress -e dotbytes="${3:-4M}" -O "$target_file" "${url}"
 
-            
+
+        # Check if directory is specifically for ULTRALYTICS
+        elif [[ "$dir" == *"ultralytics"* ]]; then
+            # Create a bbox subfolder and download there
+            provisioning_download "${url}" "${dir}/bbox"
+
+        # Default case for other directories
         else
-            # Default download for other directories
             provisioning_download "${url}" "${dir}"
         fi
 
         printf "\n"
     done
 }
-
-
-# ### FUNCTION 3
-# function provisioning_get_models() {
-#     if [[ -z $2 ]]; then return 1; fi
-
-#     dir="$1"
-#     mkdir -p "$dir"
-#     shift
-#     arr=("$@")
-
-#     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
-    
-#     for url in "${arr[@]}"; do
-#         printf "Downloading: %s\n" "${url}"
-        
-#         # Check if directory is specifically for CLIP_VISION
-#         if [[ "$dir" == *"clip_vision"* ]]; then
-#             # Extract the desired part of the URL for the filename
-#             base_name=$(basename "$url" | sed 's/model.safetensors/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors/')
-#             provisioning_download "${url}" "${dir}/${base_name}"
-
-#         # Check if directory is specifically for ULTRALYTICS
-#         elif [[ "$dir" == *"ultralytics"* ]]; then
-#             # Create a bbox subfolder and download there
-#             provisioning_download "${url}" "${dir}/bbox"
-
-#         # Default case for other directories
-#         else
-#             provisioning_download "${url}" "${dir}"
-#         fi
-
-#         printf "\n"
-#     done
-# }
-
-
-
-
 
 
 
