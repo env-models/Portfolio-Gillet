@@ -28,6 +28,7 @@ NODES=(
     "https://github.com/Gourieff/comfyui-reactor-node"
     "https://github.com/BlenderNeko/ComfyUI_Noise"
     "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+    "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
 )
 
 CHECKPOINT_MODELS=(
