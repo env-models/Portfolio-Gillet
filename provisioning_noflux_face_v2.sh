@@ -15,6 +15,10 @@ APT_PACKAGES=(
 
 PIP_PACKAGES=(
     #"package-1"
+     "pillow==10.2.0" 
+     "insightface"
+     "onnxruntime"
+     "onnxruntime-gpu"
     #"package-2"
 )
 
@@ -72,9 +76,6 @@ CLIP_VISION=(
     "https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/resolve/main/model.safetensors"
 )
 
-INSIGHTFACE=(
-    "https://huggingface.co/ezioruan/inswapper_128.onnx/resolve/main/inswapper_128.onnx"
-)
 
 FACESTORE_MODELS=(
     "https://huggingface.co/talhaty/GFPGANv1.4/resolve/main/GFPGANv1.4.pth"
@@ -86,7 +87,7 @@ FACEDETECTION=(
 
 IPADAPTER=(
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
+    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin"
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-portrait_sdxl.bin"
@@ -103,10 +104,12 @@ LORA_MODELS=(
     # "https://civitai.com/api/download/models/16576"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15_lora.safetensors"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15_lora.safetensors"
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plus_sd15_lora.safetensors"
 )
 
 
 INSIGHTFACE=(
+    "https://huggingface.co/ezioruan/inswapper_128.onnx/resolve/main/inswapper_128.onnx"
     "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/1k3d68.onnx"
     "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/2d106det.onnx"
     "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/det_10g.onnx"
