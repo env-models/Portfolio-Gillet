@@ -53,8 +53,12 @@ CHECKPOINT_MODELS=(
     # "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
 )
 
-
+# https://huggingface.co/HuggingFaceM4/Florence-2-DocVQA/resolve/main/model.safetensors
 # https://huggingface.co/HuggingFaceM4/Florence-2-DocVQA/resolve/main/model.safetensors ?????????/
+
+LLM=(
+    "https://huggingface.co/HuggingFaceM4/Florence-2-DocVQA/resolve/main/model.safetensors"
+)
 
 UNET_MODELS=(
     # flux1-dev.safetensors
@@ -76,10 +80,10 @@ ESRGAN_MODELS=(
     "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
 )
 
-CLIP=(
-    # "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
-    # "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
-)
+# CLIP=(
+#     # "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
+#     # "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
+# )
 
 CLIP_VISION=(
     "https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/resolve/main/model.safetensors"
@@ -197,8 +201,11 @@ function provisioning_start() {
         "${WORKSPACE}/storage/stable_diffusion/models/insightface" \
         "${INSIGHTFACE[@]}"
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/ultralytics" \
-        "${ULTRALYTICS[@]}"
+        "${WORKSPACE}/storage/stable_diffusion/models/llm" \
+        "${LLM[@]}"
+    # provisioning_get_models \
+    #     "${WORKSPACE}/storage/stable_diffusion/models/ultralytics" \
+    #     "${ULTRALYTICS[@]}"
     provisioning_print_end
 }
 
