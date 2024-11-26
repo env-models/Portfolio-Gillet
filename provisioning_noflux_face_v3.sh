@@ -288,11 +288,14 @@ function provisioning_get_models() {
         # Check if directory is specifically for INSIGHTFACE
         elif [[ "$dir" == *"insightface"* ]]; then
             # Check if URL belongs to insightface and contains a nested directory
-            if [[ "$url" =~ resolve/main/(.+)/(.+) ]]; then
+            if [[ "$url" =~ resolve/main/(.+)/ ]]; then
+            # if [[ "$url" =~ resolve/main/(.+)/(.+) ]]; then
                 nested_dir="${BASH_REMATCH[1]}"
-                target_dir="${dir}/${nested_dir}"
-                mkdir -p "$target_dir" || { echo "Failed to create directory: $target_dir"; continue; }
                 file_name="${BASH_REMATCH[2]}"
+                target_dir="${dir}/${nested_dir}"
+                printf "USING target_dir == %s\n" "$target_dir" 
+                
+                mkdir -p "$target_dir" || { echo "Failed to create directory: $target_dir"; continue; }
                 printf "Insightface model detected. Downloading to: %s/%s\n" "$target_dir" "$file_name"
 
                 # Download using provisioning_download
