@@ -40,7 +40,7 @@ CHECKPOINT_MODELS=(
     # "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
     "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
     "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
-    # "https://huggingface.co/Lykon/dreamshaper-xl-v2-turbo/resolve/main/DreamShaperXL_Turbo_v2.safetensors"
+    "https://huggingface.co/Lykon/dreamshaper-xl-v2-turbo/resolve/main/DreamShaperXL_Turbo_v2.safetensors"
     # "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
 
 
@@ -121,12 +121,12 @@ INSIGHTFACE=(
 CONTROLNET_MODELS=(
     "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors"
     "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors?download"
-    "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_diffusers_xl_openpose.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
-    "https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_depth_fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
+    # "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_diffusers_xl_openpose.safetensors"
+    # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
+    # "https://huggingface.co/kohya-ss/ControlNet-diff-modules/resolve/main/diff_control_sd15_depth_fp16.safetensors"
+    # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
+    # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
+    # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
 )
 
 ULTRALYTICS=(
@@ -246,57 +246,22 @@ function provisioning_get_default_workflow() {
 }
 
 ### FUNCTION 1
-function provisioning_get_models() {
-    if [[ -z $2 ]]; then return 1; fi
-    
-    dir="$1"
-    mkdir -p "$dir"
-    shift
-    arr=("$@")
-    printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
-    for url in "${arr[@]}"; do
-        printf "Downloading: %s\n" "${url}"
-        provisioning_download "${url}" "${dir}"
-        printf "\n"
-    done
-}
-
-# ## FUNCTION 2
 # function provisioning_get_models() {
 #     if [[ -z $2 ]]; then return 1; fi
-
+    
 #     dir="$1"
 #     mkdir -p "$dir"
 #     shift
 #     arr=("$@")
-
 #     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
 #     for url in "${arr[@]}"; do
 #         printf "Downloading: %s\n" "${url}"
-
-
-#         # Check if directory is specifically for CLIP_VISION
-#         if [[ "$dir" == *"clip_vision"* ]]; then
-#              printf "Downloading and RENAMING CLIP Model\n"
-
-#             # Explicitly define the desired filename
-#             target_file="${dir}/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
-
-#             # Use wget with -O to save the file directly
-#             wget -qnc  --show-progress -e dotbytes="${3:-4M}" -O "$target_file" "${url}"
-
-            
-#         else
-#             # Default download for other directories
-#             provisioning_download "${url}" "${dir}"
-#         fi
-
+#         provisioning_download "${url}" "${dir}"
 #         printf "\n"
 #     done
 # }
 
-
-### FUNCTION 3
+### FUNCTION 2
 function provisioning_get_models() {
     if [[ -z $2 ]]; then return 1; fi
 
@@ -320,11 +285,23 @@ function provisioning_get_models() {
             # Use wget with -O to save the file directly
             wget -qnc  --show-progress -e dotbytes="${3:-4M}" -O "$target_file" "${url}"
 
+        # Check if directory is specifically for INSIGHTFACE
+        elif [[ "$dir" == *"insightface"* ]]; then
+            # Check if URL belongs to insightface and contains a nested directory
+            if [[ "$url" =~ resolve/main/(.+)/(.+) ]]; then
+                nested_dir="${BASH_REMATCH[1]}"
+                target_dir="${dir}/${nested_dir}"
+                mkdir -p "$target_dir" || { echo "Failed to create directory: $target_dir"; continue; }
+                file_name="${BASH_REMATCH[2]}"
+                printf "Insightface model detected. Downloading to: %s/%s\n" "$target_dir" "$file_name"
 
-        # Check if directory is specifically for ULTRALYTICS
-        elif [[ "$dir" == *"ultralytics"* ]]; then
-            # Create a bbox subfolder and download there
-            provisioning_download "${url}" "${dir}/bbox"
+                # Download using provisioning_download
+                provisioning_download "$url" "$target_dir"
+            else
+                # If no nested directory, download directly to the base insightface directory
+                printf "Insightface model (no nested directory). Downloading to: %s\n" "$dir"
+                provisioning_download "$url" "$dir"
+            fi
 
         # Default case for other directories
         else
@@ -334,6 +311,50 @@ function provisioning_get_models() {
         printf "\n"
     done
 }
+
+
+### FUNCTION 3
+# function provisioning_get_models() {
+#     if [[ -z $2 ]]; then return 1; fi
+
+#     dir="$1"
+#     mkdir -p "$dir"
+#     shift
+#     arr=("$@")
+
+#     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+    
+#     for url in "${arr[@]}"; do
+#         printf "Downloading: %s\n" "${url}"
+        
+#         # Check if directory is specifically for CLIP_VISION
+#         if [[ "$dir" == *"clip_vision"* ]]; then
+#              printf "Downloading and RENAMING CLIP Model\n"
+
+#             # Explicitly define the desired filename
+#             target_file="${dir}/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+
+#             # Use wget with -O to save the file directly
+#             wget -qnc  --show-progress -e dotbytes="${3:-4M}" -O "$target_file" "${url}"
+
+
+#         # Check if directory is specifically for ULTRALYTICS
+#         elif [[ "$dir" == *"ultralytics"* ]]; then
+#             # Create a bbox subfolder and download there
+#             provisioning_download "${url}" "${dir}/bbox"
+
+#         elif [[ "$dir" == *"insightface"* ]]; then
+#             # Create a bbox subfolder and download there
+#             provisioning_download "${url}" "${dir}/models/buffalo_l"
+
+#         # Default case for other directories
+#         else
+#             provisioning_download "${url}" "${dir}"
+#         fi
+
+#         printf "\n"
+#     done
+# }
 
 
 
