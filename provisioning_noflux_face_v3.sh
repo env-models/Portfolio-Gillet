@@ -40,7 +40,7 @@ CHECKPOINT_MODELS=(
     # "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
     "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
     "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
-    "https://huggingface.co/Lykon/dreamshaper-xl-v2-turbo/resolve/main/DreamShaperXL_Turbo_v2.safetensors"
+    # "https://huggingface.co/Lykon/dreamshaper-xl-v2-turbo/resolve/main/DreamShaperXL_Turbo_v2.safetensors"
     # "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
 
 
@@ -207,11 +207,29 @@ function provisioning_get_apt_packages() {
     fi
 }
 
+# function provisioning_get_pip_packages() {
+#     if [[ -n $PIP_PACKAGES ]]; then
+#             pip_install ${PIP_PACKAGES[@]}
+#     fi
+# }
+
 function provisioning_get_pip_packages() {
     if [[ -n $PIP_PACKAGES ]]; then
-            pip_install ${PIP_PACKAGES[@]}
+        printf "Preparing to install %d pip package(s):\n" "${#PIP_PACKAGES[@]}"
+        for package in "${PIP_PACKAGES[@]}"; do
+            printf "Installing pip package: %s\n" "$package"
+        done
+        printf "Executing pip install...\n"
+        pip_install "${PIP_PACKAGES[@]}" || {
+            echo "Error: Failed to install one or more pip packages."
+            return 1
+        }
+        printf "Pip packages installed successfully.\n"
+    else
+        echo "No pip packages to install."
     fi
 }
+
 
 function provisioning_get_nodes() {
     for repo in "${NODES[@]}"; do
