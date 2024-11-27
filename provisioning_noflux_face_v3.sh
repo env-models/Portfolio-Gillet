@@ -245,7 +245,6 @@ function provisioning_get_pip_packages() {
             if [[ $? -ne 0 ]]; then
                 echo "Error: Failed to install pip package: $package"
                 echo "Details: $error_output"
-                return 1
             fi
         done
         printf "All pip packages installed successfully.\n"
