@@ -141,9 +141,10 @@ ULTRALYTICS=(
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
-    # if [[ ! -d /opt/environments/python ]]; then 
-    #     export MAMBA_BASE=true
-    # fi
+    if [[ ! -d /opt/environments/python ]]; then 
+        # export MAMBA_BASE=true
+        export MAMBA_BASE=false
+    fi
     source /opt/ai-dock/etc/environment.sh
     source /opt/ai-dock/bin/venv-set.sh comfyui
 
