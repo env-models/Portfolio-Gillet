@@ -15,8 +15,10 @@ APT_PACKAGES=(
 
 PIP_PACKAGES=(
     #"package-1"
-     "pillow==10.2.0" 
-     "insightface"
+     "pillow==10.2.0"
+     "opencv-python>=4.8.0"
+     # "insightface"
+     "https://github.com/Gourieff/Assets/raw/main/Insightface/insightface-0.7.3-cp310-cp310-win_amd64.whl "
      "onnxruntime"
      "onnxruntime-gpu"
     #"package-2"
@@ -85,18 +87,20 @@ FACEDETECTION=(
 )
 
 IPADAPTER=(
-    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin"
-    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15.binx"    
-    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-portrait_sdxl.bin"
-    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
-    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15_light_v11.bin"
+    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
+
+    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
+    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors"
     "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors"
-    "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter_sdxl_vit-h.safetensors"
-    "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
-    "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus-face_sdxl_vit-h.safetensors"
+    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
+
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15_light_v11.bin"
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter_sdxl_vit-h.safetensors"
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus-face_sdxl_vit-h.safetensors"
 )
 
 LORA_MODELS=(
@@ -213,22 +217,43 @@ function provisioning_get_apt_packages() {
 #     fi
 # }
 
+# function provisioning_get_pip_packages() {
+#     if [[ -n $PIP_PACKAGES ]]; then
+#         printf "Preparing to install %d pip package(s):\n" "${#PIP_PACKAGES[@]}"
+#         for package in "${PIP_PACKAGES[@]}"; do
+#             printf "Installing pip package: %s\n" "$package"
+#         done
+#         printf "Executing pip install...\n"
+#         pip_install "${PIP_PACKAGES[@]}" || {
+#             echo "Error: Failed to install one or more pip packages."
+#             return 1
+#         }
+#         printf "Pip packages installed successfully.\n"
+#     else
+#         echo "No pip packages to install."
+#     fi
+# }
+
 function provisioning_get_pip_packages() {
     if [[ -n $PIP_PACKAGES ]]; then
         printf "Preparing to install %d pip package(s):\n" "${#PIP_PACKAGES[@]}"
         for package in "${PIP_PACKAGES[@]}"; do
             printf "Installing pip package: %s\n" "$package"
+            # Capture error output from the custom pip_install function
+            error_output=$(pip_install "$package" 2>&1)            
+
+            if [[ $? -ne 0 ]]; then
+                echo "Error: Failed to install pip package: $package"
+                echo "Details: $error_output"
+                return 1
+            fi
         done
-        printf "Executing pip install...\n"
-        pip_install "${PIP_PACKAGES[@]}" || {
-            echo "Error: Failed to install one or more pip packages."
-            return 1
-        }
-        printf "Pip packages installed successfully.\n"
+        printf "All pip packages installed successfully.\n"
     else
         echo "No pip packages to install."
     fi
 }
+
 
 
 function provisioning_get_nodes() {
