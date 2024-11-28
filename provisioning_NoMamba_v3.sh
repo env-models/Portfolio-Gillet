@@ -17,7 +17,8 @@ PIP_PACKAGES=(
     #"package-1"
      "pillow==10.2.0"
      "opencv-python>=4.8.0"
-     "insightface"
+     "insightface-0.7.3-cp310-cp310-win_amd64.whl"
+     # "insightface"
      # "https://github.com/Gourieff/Assets/raw/main/Insightface/insightface-0.7.3-cp310-cp310-win_amd64.whl "
      "onnxruntime"
      "onnxruntime-gpu"
@@ -27,13 +28,13 @@ PIP_PACKAGES=(
 NODES=(
     "https://github.com/ltdrdata/ComfyUI-Manager"
     "https://github.com/cubiq/ComfyUI_essentials"
-    "https://github.com/Fannovel16/comfyui_controlnet_aux"
+    # "https://github.com/Fannovel16/comfyui_controlnet_aux"
     "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
-    "https://github.com/cubiq/ComfyUI_InstantID"
-    "https://github.com/cubiq/ComfyUI_FaceAnalysis"
-    "https://github.com/Gourieff/comfyui-reactor-node"
-    "https://github.com/BlenderNeko/ComfyUI_Noise"
-    "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+    # "https://github.com/cubiq/ComfyUI_InstantID"
+    # "https://github.com/cubiq/ComfyUI_FaceAnalysis"
+    # "https://github.com/Gourieff/comfyui-reactor-node"
+    # "https://github.com/BlenderNeko/ComfyUI_Noise"
+    # "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
 )
 
 CHECKPOINT_MODELS=(
@@ -63,9 +64,9 @@ VAE_MODELS=(
 )
 
 ESRGAN_MODELS=(
-    "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
-    "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
-    "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
+    # "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
+    # "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
+    # "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
 )
 
 CLIP=(
@@ -107,7 +108,7 @@ LORA_MODELS=(
     # "https://civitai.com/api/download/models/16576"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15_lora.safetensors"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plus_sd15_lora.safetensors"
-    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15_lora.safetensors"
+    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15_lora.safetensors"
 )
 
 
