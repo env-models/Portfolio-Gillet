@@ -206,7 +206,6 @@ function provisioning_start() {
 # }
 function pip_install() {
     "$COMFYUI_VENV_PIP" install --no-cache-dir "$@"
-    fi
 }
 
 
