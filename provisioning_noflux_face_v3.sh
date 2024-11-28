@@ -14,14 +14,14 @@ APT_PACKAGES=(
 )
 
 PIP_PACKAGES=(
-    #"package-1"
-     "pillow==10.2.0"
-     "opencv-python>=4.8.0"
-     "insightface"
-     # "https://github.com/Gourieff/Assets/raw/main/Insightface/insightface-0.7.3-cp310-cp310-win_amd64.whl "
-     "onnxruntime"
-     "onnxruntime-gpu"
-    #"package-2"
+    # #"package-1"
+    #  "pillow==10.2.0"
+    #  "opencv-python>=4.8.0"
+    #  "insightface"
+    #  # "https://github.com/Gourieff/Assets/raw/main/Insightface/insightface-0.7.3-cp310-cp310-win_amd64.whl "
+    #  "onnxruntime"
+    #  "onnxruntime-gpu"
+    # #"package-2"
 )
 
 NODES=(
@@ -29,7 +29,7 @@ NODES=(
     "https://github.com/cubiq/ComfyUI_essentials"
     # "https://github.com/Fannovel16/comfyui_controlnet_aux"
     "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
-    # "https://github.com/cubiq/ComfyUI_InstantID"
+    "https://github.com/cubiq/ComfyUI_InstantID"
     # "https://github.com/cubiq/ComfyUI_FaceAnalysis"
     # "https://github.com/Gourieff/comfyui-reactor-node"
     # "https://github.com/BlenderNeko/ComfyUI_Noise"
@@ -50,7 +50,7 @@ CHECKPOINT_MODELS=(
 
 UNET_MODELS=(
     # flux1-dev.safetensors
-   # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
+   "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
     # "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
     # "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
 )
@@ -69,8 +69,8 @@ ESRGAN_MODELS=(
 )
 
 CLIP=(
-    # "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
-    # "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
+    "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
+    "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
 )
 
 CLIP_VISION=(
@@ -141,9 +141,9 @@ ULTRALYTICS=(
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
-    # if [[ ! -d /opt/environments/python ]]; then 
-    #     export MAMBA_BASE=true
-    # fi
+    if [[ ! -d /opt/environments/python ]]; then 
+        export MAMBA_BASE=true
+    fi
     source /opt/ai-dock/etc/environment.sh
     source /opt/ai-dock/bin/venv-set.sh comfyui
 
