@@ -50,7 +50,7 @@ CHECKPOINT_MODELS=(
 
 UNET_MODELS=(
     # flux1-dev.safetensors
-   "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
+   # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
     # "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
     # "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
 )
@@ -60,6 +60,7 @@ VAE_MODELS=(
     "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
     "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
     "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+    # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
 )
 
 ESRGAN_MODELS=(
@@ -134,8 +135,8 @@ CONTROLNET_MODELS=(
 )
 
 ULTRALYTICS=(
-# "https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"
-# "https://huggingface.co/Bingsu/adetailer/resolve/main/hand_yolov8s.pt"
+"https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"
+"https://huggingface.co/Bingsu/adetailer/resolve/main/hand_yolov8s.pt"
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
