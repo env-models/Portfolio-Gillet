@@ -30,10 +30,10 @@ NODES=(
     # "https://github.com/Fannovel16/comfyui_controlnet_aux"
     "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
     "https://github.com/cubiq/ComfyUI_InstantID"
-    # "https://github.com/cubiq/ComfyUI_FaceAnalysis"
+     "https://github.com/cubiq/ComfyUI_FaceAnalysis"
     # "https://github.com/Gourieff/comfyui-reactor-node"
     # "https://github.com/BlenderNeko/ComfyUI_Noise"
-    # "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+     "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
 )
 
 CHECKPOINT_MODELS=(
@@ -217,22 +217,6 @@ function provisioning_get_apt_packages() {
 #     fi
 # }
 
-# function provisioning_get_pip_packages() {
-#     if [[ -n $PIP_PACKAGES ]]; then
-#         printf "Preparing to install %d pip package(s):\n" "${#PIP_PACKAGES[@]}"
-#         for package in "${PIP_PACKAGES[@]}"; do
-#             printf "Installing pip package: %s\n" "$package"
-#         done
-#         printf "Executing pip install...\n"
-#         pip_install "${PIP_PACKAGES[@]}" || {
-#             echo "Error: Failed to install one or more pip packages."
-#             return 1
-#         }
-#         printf "Pip packages installed successfully.\n"
-#     else
-#         echo "No pip packages to install."
-#     fi
-# }
 
 function provisioning_get_pip_packages() {
     if [[ -n $PIP_PACKAGES ]]; then
@@ -252,7 +236,6 @@ function provisioning_get_pip_packages() {
         echo "No pip packages to install."
     fi
 }
-
 
 
 function provisioning_get_nodes() {
@@ -327,6 +310,11 @@ function provisioning_get_models() {
             # Use wget with -O to save the file directly
             wget -qnc  --show-progress -e dotbytes="${3:-4M}" -O "$target_file" "${url}"
 
+        # Check if directory is specifically for ULTRALYTICS
+        elif [[ "$dir" == *"ultralytics"* ]]; then
+        Create a bbox subfolder and download there
+        provisioning_download "${url}" "${dir}/bbox"
+
         # Check if directory is specifically for INSIGHTFACE
         elif [[ "$dir" == *"insightface"* ]]; then
             # Check if URL belongs to insightface and contains a nested directory
@@ -356,52 +344,6 @@ function provisioning_get_models() {
         printf "\n"
     done
 }
-
-
-### FUNCTION 3
-# function provisioning_get_models() {
-#     if [[ -z $2 ]]; then return 1; fi
-
-#     dir="$1"
-#     mkdir -p "$dir"
-#     shift
-#     arr=("$@")
-
-#     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
-    
-#     for url in "${arr[@]}"; do
-#         printf "Downloading: %s\n" "${url}"
-        
-#         # Check if directory is specifically for CLIP_VISION
-#         if [[ "$dir" == *"clip_vision"* ]]; then
-#              printf "Downloading and RENAMING CLIP Model\n"
-
-#             # Explicitly define the desired filename
-#             target_file="${dir}/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
-
-#             # Use wget with -O to save the file directly
-#             wget -qnc  --show-progress -e dotbytes="${3:-4M}" -O "$target_file" "${url}"
-
-
-#         # Check if directory is specifically for ULTRALYTICS
-#         elif [[ "$dir" == *"ultralytics"* ]]; then
-#             # Create a bbox subfolder and download there
-#             provisioning_download "${url}" "${dir}/bbox"
-
-#         elif [[ "$dir" == *"insightface"* ]]; then
-#             # Create a bbox subfolder and download there
-#             provisioning_download "${url}" "${dir}/models/buffalo_l"
-
-#         # Default case for other directories
-#         else
-#             provisioning_download "${url}" "${dir}"
-#         fi
-
-#         printf "\n"
-#     done
-# }
-
-
 
 
 function provisioning_print_header() {
