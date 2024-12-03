@@ -28,13 +28,22 @@ PIP_PACKAGES=(
 NODES=(
     "https://github.com/ltdrdata/ComfyUI-Manager"
     "https://github.com/cubiq/ComfyUI_essentials"
-    # "https://github.com/Fannovel16/comfyui_controlnet_aux"
+    "https://github.com/Fannovel16/comfyui_controlnet_aux"
     "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
     "https://github.com/cubiq/ComfyUI_InstantID"
-     "https://github.com/cubiq/ComfyUI_FaceAnalysis"
-    # "https://github.com/Gourieff/comfyui-reactor-node"
-    # "https://github.com/BlenderNeko/ComfyUI_Noise"
-     "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+    "https://github.com/cubiq/ComfyUI_FaceAnalysis"
+    "https://github.com/Gourieff/comfyui-reactor-node"
+    "https://github.com/BlenderNeko/ComfyUI_Noise"
+    "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+
+    "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes"
+    "https://github.com/rgthree/rgthree-comfy"
+    "https://github.com/BadCafeCode/masquerade-nodes-comfyui"
+    "https://github.com/kijai/ComfyUI-KJNodes"
+    "https://github.com/Ryuukeisyou/comfyui_face_parsing"
+    "https://github.com/chflame163/ComfyUI_LayerStyle"
+    "https://github.com/pythongosssss/ComfyUI-Custom-Scripts"
+    "https://github.com/chrisgoringe/cg-use-everywhere"
 )
 
 CHECKPOINT_MODELS=(
@@ -65,8 +74,8 @@ VAE_MODELS=(
 )
 
 ESRGAN_MODELS=(
-    # "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
-    # "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
+    "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
+    "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
     # "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
 )
 
