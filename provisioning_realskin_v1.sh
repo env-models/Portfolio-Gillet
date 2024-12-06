@@ -155,9 +155,8 @@ ULTRALYTICS=(
 
 VITMATTE=(
 "https://huggingface.co/hustvl/vitmatte-base-composition-1k/resolve/main/pytorch_model.bin"
-
 )
-vitmatte
+
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
@@ -212,7 +211,7 @@ function provisioning_start() {
         "${WORKSPACE}/storage/stable_diffusion/models/ultralytics" \
         "${ULTRALYTICS[@]}"
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/vitmate" \
+        "${WORKSPACE}/storage/stable_diffusion/models/vitmatte" \
         "${VITMATTE[@]}"
     provisioning_has_valid_civitai_token \
         "${WORKSPACE}/storage/stable_diffusion/models/ckpt" \
