@@ -54,9 +54,13 @@ CHECKPOINT_MODELS=(
     "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
     # "https://huggingface.co/Lykon/dreamshaper-xl-v2-turbo/resolve/main/DreamShaperXL_Turbo_v2.safetensors"
     # "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
-
-
 )
+
+CIVITAI_CHECKPOINT_MODELS=(
+# "https://civitai.com/api/download/models/1074830"
+1074830
+)
+
 
 UNET_MODELS=(
     # flux1-dev.safetensors
@@ -210,6 +214,13 @@ function provisioning_start() {
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/vitmate" \
         "${VITMATTE[@]}"
+    provisioning_has_valid_civitai_token \
+        "${WORKSPACE}/storage/stable_diffusion/models/ckpt" \
+        "${CIVITAI_CHECKPOINT_MODELS[@]}"
+    
+
+
+        
     provisioning_print_end
 }
 
@@ -291,20 +302,20 @@ function provisioning_get_default_workflow() {
 }
 
 ### FUNCTION 1
-# function provisioning_get_models() {
-#     if [[ -z $2 ]]; then return 1; fi
+function provisioning_get_models() {
+    if [[ -z $2 ]]; then return 1; fi
     
-#     dir="$1"
-#     mkdir -p "$dir"
-#     shift
-#     arr=("$@")
-#     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
-#     for url in "${arr[@]}"; do
-#         printf "Downloading: %s\n" "${url}"
-#         provisioning_download "${url}" "${dir}"
-#         printf "\n"
-#     done
-# }
+    dir="$1"
+    mkdir -p "$dir"
+    shift
+    arr=("$@")
+    printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+    for url in "${arr[@]}"; do
+        printf "Downloading: %s\n" "${url}"
+        provisioning_download "${url}" "${dir}"
+        printf "\n"
+    done
+}
 
 ### FUNCTION 2
 function provisioning_get_models() {
@@ -393,21 +404,21 @@ function provisioning_has_valid_hf_token() {
     fi
 }
 
-function provisioning_has_valid_civitai_token() {
-    [[ -n "$CIVITAI_TOKEN" ]] || return 1
-    url="https://civitai.com/api/v1/models?hidden=1&limit=1"
+# function provisioning_has_valid_civitai_token() {
+#     [[ -n "$CIVITAI_TOKEN" ]] || return 1
+#     url="https://civitai.com/api/v1/models?hidden=1&limit=1"
 
-    response=$(curl -o /dev/null -s -w "%{http_code}" -X GET "$url" \
-        -H "Authorization: Bearer $CIVITAI_TOKEN" \
-        -H "Content-Type: application/json")
+#     response=$(curl -o /dev/null -s -w "%{http_code}" -X GET "$url" \
+#         -H "Authorization: Bearer $CIVITAI_TOKEN" \
+#         -H "Content-Type: application/json")
 
-    # Check if the token is valid
-    if [ "$response" -eq 200 ]; then
-        return 0
-    else
-        return 1
-    fi
-}
+#     # Check if the token is valid
+#     if [ "$response" -eq 200 ]; then
+#         return 0
+#     else
+#         return 1
+#     fi
+# }
 
 # Download from $1 URL to $2 file path
 function provisioning_download() {
@@ -423,5 +434,52 @@ function provisioning_download() {
         wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
     fi
 }
+
+#!/bin/bash
+
+# Function to validate the Civitai token and optionally download a model
+function provisioning_has_valid_civitai_token() {
+    # Hardcoded Civitai token
+    local CIVITAI_TOKEN="8d3612baaafd4ed9db408ff955a3f87c"
+
+    local target_directory="${1:-}"
+    local model_id="${2:-}"
+
+    # Ensure the target directory is provided
+    if [[ -z "$target_directory" ]]; then
+        echo "Error: Target directory is required as the first argument." >&2
+        return 1
+    fi
+
+    # Ensure the model ID or name is provided
+    if [[ -z "$model_id" ]]; then
+        echo "Error: Model ID or name is required as the second argument." >&2
+        return 1
+    fi
+
+    # Ensure the target directory exists
+    mkdir -p "$target_directory"
+
+    # Construct the URL for downloading the model
+    local url="https://civitai.com/api/download/models/$model_id"
+    local output_file="$target_directory/$model_id.safetensors"
+
+    # Attempt to download the model
+    echo "Downloading model ID: $model_id to directory: $target_directory"
+    curl -H "Authorization: Bearer $CIVITAI_TOKEN" \
+         -L -o "$output_file" \
+         "$url"
+
+    if [[ $? -eq 0 ]]; then
+        echo "Model downloaded successfully: $output_file"
+        return 0
+    else
+        echo "Error: Failed to download model with ID $model_id" >&2
+        return 1
+    fi
+}
+
+
+
 
 provisioning_start
