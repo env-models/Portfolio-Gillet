@@ -57,14 +57,14 @@ CHECKPOINT_MODELS=(
 )
 
 CIVITAI_CHECKPOINT_MODELS=(
-# "https://civitai.com/api/download/models/1074830"
-1074830
+    # "https://civitai.com/api/download/models/1074830"
+    1074830
 )
 
 
 UNET_MODELS=(
-    # flux1-dev.safetensors
-   # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
+    "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/flux1-schnell.safetensors"
+    # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
     # "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
     # "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
 )
@@ -74,6 +74,7 @@ VAE_MODELS=(
     # "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
     # "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
     "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+    "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors"
     # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
 )
 
@@ -84,8 +85,8 @@ ESRGAN_MODELS=(
 )
 
 CLIP=(
-    # "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
-    # "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
+    "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
+    "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
 )
 
 CLIP_VISION=(
@@ -217,10 +218,6 @@ function provisioning_start() {
     provisioning_has_valid_civitai_token \
         "${WORKSPACE}/storage/stable_diffusion/models/ckpt" \
         "${CIVITAI_CHECKPOINT_MODELS[@]}"
-    
-
-
-        
     provisioning_print_end
 }
 
@@ -301,21 +298,21 @@ function provisioning_get_default_workflow() {
     fi
 }
 
-### FUNCTION 1
-function provisioning_get_models() {
-    if [[ -z $2 ]]; then return 1; fi
+# ### FUNCTION 1
+# function provisioning_get_models() {
+#     if [[ -z $2 ]]; then return 1; fi
     
-    dir="$1"
-    mkdir -p "$dir"
-    shift
-    arr=("$@")
-    printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
-    for url in "${arr[@]}"; do
-        printf "Downloading: %s\n" "${url}"
-        provisioning_download "${url}" "${dir}"
-        printf "\n"
-    done
-}
+#     dir="$1"
+#     mkdir -p "$dir"
+#     shift
+#     arr=("$@")
+#     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+#     for url in "${arr[@]}"; do
+#         printf "Downloading: %s\n" "${url}"
+#         provisioning_download "${url}" "${dir}"
+#         printf "\n"
+#     done
+# }
 
 ### FUNCTION 2
 function provisioning_get_models() {
@@ -404,21 +401,6 @@ function provisioning_has_valid_hf_token() {
     fi
 }
 
-# function provisioning_has_valid_civitai_token() {
-#     [[ -n "$CIVITAI_TOKEN" ]] || return 1
-#     url="https://civitai.com/api/v1/models?hidden=1&limit=1"
-
-#     response=$(curl -o /dev/null -s -w "%{http_code}" -X GET "$url" \
-#         -H "Authorization: Bearer $CIVITAI_TOKEN" \
-#         -H "Content-Type: application/json")
-
-#     # Check if the token is valid
-#     if [ "$response" -eq 200 ]; then
-#         return 0
-#     else
-#         return 1
-#     fi
-# }
 
 # Download from $1 URL to $2 file path
 function provisioning_download() {
@@ -435,9 +417,24 @@ function provisioning_download() {
     fi
 }
 
-#!/bin/bash
-
 # Function to validate the Civitai token and optionally download a model
+
+# function provisioning_has_valid_civitai_token() {
+#     [[ -n "$CIVITAI_TOKEN" ]] || return 1
+#     url="https://civitai.com/api/v1/models?hidden=1&limit=1"
+
+#     response=$(curl -o /dev/null -s -w "%{http_code}" -X GET "$url" \
+#         -H "Authorization: Bearer $CIVITAI_TOKEN" \
+#         -H "Content-Type: application/json")
+
+#     # Check if the token is valid
+#     if [ "$response" -eq 200 ]; then
+#         return 0
+#     else
+#         return 1
+#     fi
+# }
+
 function provisioning_has_valid_civitai_token() {
     # Hardcoded Civitai token
     local CIVITAI_TOKEN="8d3612baaafd4ed9db408ff955a3f87c"
@@ -478,8 +475,6 @@ function provisioning_has_valid_civitai_token() {
         return 1
     fi
 }
-
-
 
 
 provisioning_start
