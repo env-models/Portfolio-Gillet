@@ -299,20 +299,20 @@ function provisioning_get_default_workflow() {
 }
 
 # ### FUNCTION 1
-# function provisioning_get_models() {
-#     if [[ -z $2 ]]; then return 1; fi
+function provisioning_get_models() {
+    if [[ -z $2 ]]; then return 1; fi
     
-#     dir="$1"
-#     mkdir -p "$dir"
-#     shift
-#     arr=("$@")
-#     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
-#     for url in "${arr[@]}"; do
-#         printf "Downloading: %s\n" "${url}"
-#         provisioning_download "${url}" "${dir}"
-#         printf "\n"
-#     done
-# }
+    dir="$1"
+    mkdir -p "$dir"
+    shift
+    arr=("$@")
+    printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+    for url in "${arr[@]}"; do
+        printf "Downloading: %s\n" "${url}"
+        provisioning_download "${url}" "${dir}"
+        printf "\n"
+    done
+}
 
 ### FUNCTION 2
 function provisioning_get_models() {
