@@ -9,7 +9,7 @@
 #DEFAULT_WORKFLOW="https://..."
 
 APT_PACKAGES=(
-    "python3.10-dev"
+    # "python3.10-dev"
     #"package-1"
     #"package-2"
 )
@@ -33,12 +33,9 @@ NODES=(
     "https://github.com/cubiq/ComfyUI_InstantID"
     
     # "https://github.com/cubiq/ComfyUI_FaceAnalysis"
-    
     # "https://github.com/Gourieff/comfyui-reactor-node"
-    
     # "https://github.com/BlenderNeko/ComfyUI_Noise"
     # "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
-
     # "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes"
     # "https://github.com/rgthree/rgthree-comfy"
     # "https://github.com/BadCafeCode/masquerade-nodes-comfyui"
@@ -57,7 +54,7 @@ CHECKPOINT_MODELS=(
     # "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
     "https://huggingface.co/digiplay/DreamShaper_8/resolve/main/dreamshaper_8.safetensors"
     # "https://huggingface.co/Lykon/dreamshaper-xl-v2-turbo/resolve/main/DreamShaperXL_Turbo_v2.safetensors"
-    # "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
+    "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
 )
 
 CIVITAI_CHECKPOINT_MODELS=(
@@ -69,7 +66,7 @@ CIVITAI_CHECKPOINT_MODELS=(
 UNET_MODELS=(
     # "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/flux1-schnell.safetensors"
     # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
-    # "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
+    "https://huggingface.co/Lykon/dreamshaper-8-inpainting/resolve/main/unet/diffusion_pytorch_model.safetensors"
     # "https://huggingface.co/redstonehero/dreamshaper-inpainting/resolve/main/unet/diffusion_pytorch_model.bin"
 )
 
