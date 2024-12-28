@@ -136,9 +136,9 @@ IPADAPTER=(
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus-face_sdxl_vit-h.safetensors"
 )
 
-IPADAPTER_FLUX=(
-"https://huggingface.co/InstantX/FLUX.1-dev-IP-Adapter/resolve/main/ip-adapter.bin"
-)
+# IPADAPTER_FLUX=(
+# "https://huggingface.co/InstantX/FLUX.1-dev-IP-Adapter/resolve/main/ip-adapter.bin"
+# )
 
 LORA_MODELS=(
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15_lora.safetensors"
@@ -227,9 +227,9 @@ function provisioning_start() {
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/ipadapter" \
         "${IPADAPTER[@]}"
-    provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/ipadapter-flux" \
-        "${IPADAPTER_FLUX[@]}"
+    # provisioning_get_models \
+    #     "${WORKSPACE}/storage/stable_diffusion/models/ipadapter-flux" \
+    #     "${IPADAPTER_FLUX[@]}"
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/clip" \
         "${CLIP[@]}"
