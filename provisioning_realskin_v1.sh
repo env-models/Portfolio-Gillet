@@ -33,7 +33,7 @@ NODES=(
     "https://github.com/cubiq/ComfyUI_InstantID"
     "https://github.com/cubiq/ComfyUI_FaceAnalysis"
     
-    # "https://github.com/Gourieff/comfyui-reactor-node"
+    "https://github.com/Gourieff/comfyui-reactor-node"
     # "https://github.com/BlenderNeko/ComfyUI_Noise"
     # "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
     # "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes"
@@ -59,7 +59,7 @@ CHECKPOINT_MODELS=(
 
 CIVITAI_CHECKPOINT_MODELS=(
     # "https://civitai.com/api/download/models/1074830"
-    # 1074830
+    1074830
 )
 
 
@@ -74,7 +74,7 @@ UNET_MODELS=(
 VAE_MODELS=(
     # "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
     "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
-    # "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+    "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
     # "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors"
     # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
 )
@@ -107,13 +107,13 @@ IPADAPTER=(
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin"
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15.binx"    
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
-    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sdxl.bin"
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sdxl.bin"
 
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-portrait_sdxl.bin"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
+    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15_light_v11.bin"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter_sdxl_vit-h.safetensors"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
@@ -160,7 +160,7 @@ ULTRALYTICS=(
 )
 
 VITMATTE=(
-# "https://huggingface.co/hustvl/vitmatte-base-composition-1k/resolve/main/pytorch_model.bin"
+"https://huggingface.co/hustvl/vitmatte-base-composition-1k/resolve/main/pytorch_model.bin"
 )
 
 
