@@ -28,12 +28,12 @@ PIP_PACKAGES=(
 NODES=(
     "https://github.com/ltdrdata/ComfyUI-Manager"
     "https://github.com/cubiq/ComfyUI_essentials"
-    "https://github.com/Fannovel16/comfyui_controlnet_aux"
-    "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
-    "https://github.com/cubiq/ComfyUI_InstantID"
-    "https://github.com/cubiq/ComfyUI_FaceAnalysis"
+    # "https://github.com/Fannovel16/comfyui_controlnet_aux"
+    # "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
+    # "https://github.com/cubiq/ComfyUI_InstantID"
+    # "https://github.com/cubiq/ComfyUI_FaceAnalysis"
     
-    "https://github.com/Gourieff/comfyui-reactor-node"
+    # "https://github.com/Gourieff/comfyui-reactor-node"
     # "https://github.com/BlenderNeko/ComfyUI_Noise"
     # "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
     # "https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes"
@@ -73,15 +73,15 @@ UNET_MODELS=(
 
 VAE_MODELS=(
     # "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
-    "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
-    "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+    # "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
+    # "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
     # "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors"
     # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
 )
 
 ESRGAN_MODELS=(
-    "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
-    "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
+    # "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
+    # "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
     # "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
 )
 
@@ -91,29 +91,29 @@ CLIP=(
 )
 
 CLIP_VISION=(
-    "https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/resolve/main/model.safetensors"
+    # "https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/resolve/main/model.safetensors"
 )
 
 
 FACESTORE_MODELS=(
-    "https://huggingface.co/talhaty/GFPGANv1.4/resolve/main/GFPGANv1.4.pth"
+    # "https://huggingface.co/talhaty/GFPGANv1.4/resolve/main/GFPGANv1.4.pth"
 )
 
 FACEDETECTION=(
-    "https://huggingface.co/darkeril/collection/resolve/main/detection_Resnet50_Final.pth"
+    # "https://huggingface.co/darkeril/collection/resolve/main/detection_Resnet50_Final.pth"
 )
 
 IPADAPTER=(
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin"
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15.binx"    
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
-    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sdxl.bin"
+    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sdxl.bin"
 
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-portrait_sdxl.bin"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors"
-    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15_light_v11.bin"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter_sdxl_vit-h.safetensors"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
@@ -133,18 +133,18 @@ LORA_MODELS=(
 
 
 INSIGHTFACE=(
-    "https://huggingface.co/ezioruan/inswapper_128.onnx/resolve/main/inswapper_128.onnx"
-    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/1k3d68.onnx"
-    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/2d106det.onnx"
-    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/det_10g.onnx"
-    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/genderage.onnx"
-    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/w600k_r50.onnx"
+    # "https://huggingface.co/ezioruan/inswapper_128.onnx/resolve/main/inswapper_128.onnx"
+    # "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/1k3d68.onnx"
+    # "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/2d106det.onnx"
+    # "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/det_10g.onnx"
+    # "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/genderage.onnx"
+    # "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/w600k_r50.onnx"
 )
 
 
 
 CONTROLNET_MODELS=(
-    "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors"
+    # "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors"
     # "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_mid.safetensors?download"
     # "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/t2i-adapter_diffusers_xl_openpose.safetensors"
     # "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
@@ -155,12 +155,12 @@ CONTROLNET_MODELS=(
 )
 
 ULTRALYTICS=(
-"https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"
-"https://huggingface.co/Bingsu/adetailer/resolve/main/hand_yolov8s.pt"
+# "https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"
+# "https://huggingface.co/Bingsu/adetailer/resolve/main/hand_yolov8s.pt"
 )
 
 VITMATTE=(
-"https://huggingface.co/hustvl/vitmatte-base-composition-1k/resolve/main/pytorch_model.bin"
+# "https://huggingface.co/hustvl/vitmatte-base-composition-1k/resolve/main/pytorch_model.bin"
 )
 
 
