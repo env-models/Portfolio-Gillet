@@ -33,7 +33,7 @@ NODES=(
     # "https://github.com/Fannovel16/comfyui_controlnet_aux"
     # "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
     # "https://github.com/cubiq/ComfyUI_InstantID"
-    "https://github.com/cubiq/ComfyUI_FaceAnalysis"
+    # "https://github.com/cubiq/ComfyUI_FaceAnalysis"
     
     # "https://github.com/Gourieff/comfyui-reactor-node"
     # "https://github.com/BlenderNeko/ComfyUI_Noise"
@@ -303,7 +303,8 @@ function provisioning_get_nodes() {
         path="/opt/ComfyUI/custom_nodes/${dir%.*}"  # Remove file extensions (e.g., .zip, .tar.gz)
         requirements="${path}/requirements.txt"
 
-        if [[ $repo =~ /releases/download/ ]]; then
+        # if [[ $repo =~ /releases/download/ ]]; then
+        if [[ $repo =~ /archive/refs/tags/ ]]; then
             # Handle downloadable release assets (e.g., ZIP files)
             printf "Downloading release asset: %s...\n" "$repo"
 
