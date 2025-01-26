@@ -60,7 +60,7 @@ CHECKPOINT_MODELS=(
 
 CIVITAI_CHECKPOINT_MODELS=(
     # "https://civitai.com/api/download/models/1074830"
-    1074830
+    # 1074830
 )
 
 
