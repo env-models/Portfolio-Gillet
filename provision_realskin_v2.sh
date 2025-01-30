@@ -237,11 +237,6 @@ function provisioning_get_apt_packages() {
     fi
 }
 
-# function provisioning_get_pip_packages() {
-#     if [[ -n $PIP_PACKAGES ]]; then
-#             pip_install ${PIP_PACKAGES[@]}
-#     fi
-# }
 
 
 function provisioning_get_pip_packages() {
@@ -270,9 +265,9 @@ function provisioning_get_nodes() {
         dir="${repo##*/}"  # Extract the last part of the URL or file name        
         path="/opt/ComfyUI/custom_nodes/${dir}"
         requirements="${path}/requirements.txt"
-        printf "dir is equal to : %s\n" "$dir"
-        printf "path is equal to : %s\n" "$path"
-        printf "PWD is equal to : %s\n" "$PWD"
+        printf "dir is equal to: %s\n" "$dir" >&2
+        printf "path is equal to : %s\n" "$path" >&2
+        printf "PWD is equal to : %s\n" "$PWD" >&2
 
 
         if [[ $repo =~ /archive/refs/tags/ ]]; then
@@ -293,15 +288,25 @@ function provisioning_get_nodes() {
                 rmdir "$extracted_folder"
             fi
 
-            # Clean up the archive after extraction
-            printf "Cleaning up: %s\n" "$(basename "$repo")"
-            rm "$downloaded_file"
-            
+            # Recheck requirements.txt after moving files
+            if [[ ! -e $requirements ]]; then
+                new_requirements=$(find "$path" -name "requirements.txt" | head -n 1)
+                if [[ -n "$new_requirements" ]]; then
+                    requirements="$new_requirements"
+                fi
+            fi
+
             # Check for requirements.txt
             if [[ -e $requirements ]]; then
                 printf "Installing requirements for node: %s...\n" "$dir"
-                pip_install -r "$requirements"
+                pip_install -r "$requirements" || { echo "Failed to install dependencies!"; exit 1; }
             fi
+
+            # Clean up the archive after extraction
+            printf "Cleaning up: %s\n" "$(basename "$repo")"
+            rm "$downloaded_file"
+
+            
         else
             # Handle Git repositories
             printf "Downloading node: %s...\n" "$repo"
