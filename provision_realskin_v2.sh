@@ -263,142 +263,72 @@ function provisioning_get_pip_packages() {
 }
 
 
+# provisioning_get_nodes to get past released of confyui manager
 function provisioning_get_nodes() {
     for repo in "${NODES[@]}"; do
-        dir="${repo##*/}"
+        dir="${repo##*/}"  # Extract the last part of the URL or file name        
         path="/opt/ComfyUI/custom_nodes/${dir}"
         requirements="${path}/requirements.txt"
-        if [[ -d $path ]]; then
-            if [[ ${AUTO_UPDATE,,} != "false" ]]; then
-                printf "Updating node: %s...\n" "${repo}"
-                ( cd "$path" && git pull )
-                if [[ -e $requirements ]]; then
-                   pip_install -r "$requirements"
-                fi
+        printf "dir is equal to : %s\n" "$dir"
+        printf "path is equal to : %s\n" "$path"
+        printf "PWD is equal to : %s\n" "$PWD"
+
+
+        if [[ $repo =~ /archive/refs/tags/ ]]; then
+            # Handle GitHub source code archive for tags
+            printf "Downloading source code archive: %s...\n" "$repo"
+            mkdir -p "$path"
+            
+            downloaded_file="$path/$(basename "$repo")"
+            printf "Showing download  of file : %s " "$(basename "$repo")"
+            # wget --show-progress --verbose -O "$path/$(basename "$repo")" "$repo"
+            wget --show-progress --verbose -O "$downloaded_file" "$repo"
+            unzip -qo "$downloaded_file" -d "$path"
+            
+            # Check for requirements.txt
+            if [[ -e $requirements ]]; then
+                printf "Installing requirements for node: %s...\n" "$dir"
+                pip_install -r "$requirements"
             fi
         else
-            printf "Downloading node: %s...\n" "${repo}"
-            git clone "${repo}" "${path}" --recursive
-            if [[ -e $requirements ]]; then
-                pip_install -r "${requirements}"
+            # Handle Git repositories
+            printf "Downloading node: %s...\n" "$repo"
+            if [[ -d $path ]]; then
+                printf "Updating node: %s...\n" "$repo"
+                (cd "$path" && git pull)
+                if [[ -e $requirements ]]; then
+                    pip_install -r "$requirements"
+                fi
+            else
+                git clone "${repo}" "${path}" --recursive
+                if [[ -e $requirements ]]; then
+                    pip_install -r "$requirements"
+                fi
             fi
         fi
     done
 }
 
-#provisioning_get_nodes to get past released of confyui manager
+
+#Deprecated fct
 # function provisioning_get_nodes() {
 #     for repo in "${NODES[@]}"; do
-#         dir="${repo##*/}"  # Extract the last part of the URL or file name
+#         dir="${repo##*/}"
 #         path="/opt/ComfyUI/custom_nodes/${dir}"
-#         # path="${PWD}/custom_nodes/${dir%.*}"  # Use the current directory for downloading
 #         requirements="${path}/requirements.txt"
-
-#         if [[ $repo =~ /releases/download/ ]]; then
-#             # Handle downloadable release assets
-#             printf "Downloading release asset: %s...\n" "$repo"
-#             mkdir -p "$path"
-#             wget -q -O "${PWD}/$dir" "$repo"
-
-#             # Extract based on file extension
-#             if [[ $dir == *.zip ]]; then
-#                 unzip -qo "${PWD}/$dir" -d "$path"
-#             elif [[ $dir == *.tar.gz ]]; then
-#                 tar -xzf "${PWD}/$dir" -C "$path"
-#             fi
-#             rm "${PWD}/$dir"
-
-#             # Check for requirements.txt
-#             if [[ -e $requirements ]]; then
-#                 printf "Installing requirements for node: %s...\n" "$dir"
-#                 pip_install -r "$requirements"
-#             fi
-#         elif [[ $repo =~ /archive/refs/tags/ ]]; then
-#             # Handle GitHub source code archive for tags
-#             printf "Downloading source code archive: %s...\n" "$repo"
-#             mkdir -p "$path"
-#             wget -q -O "${PWD}/$dir" "$repo"
-#             unzip -qo "${PWD}/$dir" -d "$path"
-#             rm "${PWD}/$dir"
-
-#             # Check for requirements.txt
-#             if [[ -e $requirements ]]; then
-#                 printf "Installing requirements for node: %s...\n" "$dir"
-#                 pip_install -r "$requirements"
+#         if [[ -d $path ]]; then
+#             if [[ ${AUTO_UPDATE,,} != "false" ]]; then
+#                 printf "Updating node: %s...\n" "${repo}"
+#                 ( cd "$path" && git pull )
+#                 if [[ -e $requirements ]]; then
+#                    pip_install -r "$requirements"
+#                 fi
 #             fi
 #         else
-#             # Handle Git repositories
-#             printf "Downloading node: %s...\n" "$repo"
-#             if [[ -d $path ]]; then
-#                 printf "Updating node: %s...\n" "$repo"
-#                 (cd "$path" && git pull)
-#                 if [[ -e $requirements ]]; then
-#                     pip_install -r "$requirements"
-#                 fi
-#             else
-#                 git clone "${repo}" "${path}" --recursive
-#                 if [[ -e $requirements ]]; then
-#                     pip_install -r "$requirements"
-#                 fi
-#             fi
-#         fi
-#     done
-# }
-
-
-
-
-# function provisioning_get_nodes() {
-#     for repo in "${NODES[@]}"; do
-#         # Extract the directory or file name from the URL
-#         dir="${repo##*/}"  # Last part of URL
-#         path="/opt/ComfyUI/custom_nodes/${dir%.*}"  # Remove file extensions (e.g., .zip, .tar.gz)
-#         requirements="${path}/requirements.txt"
-
-#         # if [[ $repo =~ /releases/download/ ]]; then
-#         if [[ $repo =~ /archive/refs/tags/ ]]; then
-#             # Handle downloadable release assets (e.g., ZIP files)
-#             printf "Downloading release asset: %s...\n" "$repo"
-
-#             # Create the target directory
-#             mkdir -p "$path"
-
-#             # Download the file
-#             wget -q -O "/tmp/$dir" "$repo"
-
-#             # Extract the file based on its extension
-#             if [[ $dir == *.zip ]]; then
-#                 unzip -qo "/tmp/$dir" -d "$path"
-#             elif [[ $dir == *.tar.gz ]]; then
-#                 tar -xzf "/tmp/$dir" -C "$path"
-#             fi
-
-#             # Clean up the temporary file
-#             rm "/tmp/$dir"
-
-#             # Install requirements if `requirements.txt` exists
+#             printf "Downloading node: %s...\n" "${repo}"
+#             git clone "${repo}" "${path}" --recursive
 #             if [[ -e $requirements ]]; then
-#                 printf "Installing requirements for node: %s...\n" "$dir"
-#                 pip_install -r "$requirements"
-#             fi
-#         else
-#             # Handle regular Git repositories
-#             printf "Downloading node: %s...\n" "$repo"
-#             if [[ -d $path ]]; then
-#                 # If the directory exists, pull updates
-#                 if [[ ${AUTO_UPDATE,,} != "false" ]]; then
-#                     printf "Updating node: %s...\n" "$repo"
-#                     (cd "$path" && git pull)
-#                     if [[ -e $requirements ]]; then
-#                         pip_install -r "$requirements"
-#                     fi
-#                 fi
-#             else
-#                 # Clone the repository if it doesn't exist
-#                 git clone "${repo}" "${path}" --recursive
-#                 if [[ -e $requirements ]]; then
-#                     pip_install -r "$requirements"
-#                 fi
+#                 pip_install -r "${requirements}"
 #             fi
 #         fi
 #     done
