@@ -280,10 +280,23 @@ function provisioning_get_nodes() {
             mkdir -p "$path"
             
             downloaded_file="$path/$(basename "$repo")"
-            printf "Showing download  of file : %s " "$(basename "$repo")"
+            printf "Showing download  of file : %s\n " "$(basename "$repo")"
             # wget --show-progress --verbose -O "$path/$(basename "$repo")" "$repo"
             wget --show-progress --verbose -O "$downloaded_file" "$repo"
-            unzip -qo "$downloaded_file" -d "$path"
+            # unzip -qo "$downloaded_file" -d "$path"
+            unzip -qo "$downloaded_file" -d "$path" && mv "$path"/*/* "$path/" 2>/dev/null || true
+
+
+            # Fix the directory structure if extraction creates an extra subdirectory
+            extracted_folder=$(find "$path" -maxdepth 1 -type d -not -path "$path" | head -n 1)
+            if [[ -d "$extracted_folder" ]]; then
+                printf "Moving extracted contents from %s to %s\n" "$extracted_folder" "$path"
+                mv "$extracted_folder"/* "$path/"
+                rmdir "$extracted_folder"
+            fi
+            # Clean up the archive after extraction
+            printf "Cleaning up: %s\n" "$(basename "$repo")"
+            rm "$downloaded_file"
             
             # Check for requirements.txt
             if [[ -e $requirements ]]; then
