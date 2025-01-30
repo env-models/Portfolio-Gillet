@@ -259,72 +259,122 @@ function provisioning_get_pip_packages() {
 }
 
 
-# provisioning_get_nodes to get past released of confyui manager
+# version 3 
+
 function provisioning_get_nodes() {
+    set -x  # Debug mode: prints each command before execution
+
     for repo in "${NODES[@]}"; do
-        dir="${repo##*/}"  # Extract the last part of the URL or file name        
+        dir="${repo##*/}"
         path="/opt/ComfyUI/custom_nodes/${dir}"
         requirements="${path}/requirements.txt"
-        printf "dir is equal to: %s\n" "$dir" >&2
-        printf "path is equal to : %s\n" "$path" >&2
-        printf "PWD is equal to : %s\n" "$PWD" >&2
 
+        echo "DEBUG: dir is $dir" >&2
+        echo "DEBUG: path is $path" >&2
+        echo "DEBUG: Current working directory is $PWD" >&2
 
         if [[ $repo =~ /archive/refs/tags/ ]]; then
-            # Handle GitHub source code archive for tags
-            printf "Downloading source code archive: %s...\n" "$repo"
+            echo "Downloading source code archive: $repo" >&2
             mkdir -p "$path"
             
             downloaded_file="$path/$(basename "$repo")"
-            printf "Showing download  of file : %s\n " "$(basename "$repo")"
+            echo "Downloading file: $(basename "$repo")" >&2
             wget --show-progress --verbose -O "$downloaded_file" "$repo"
             unzip -qo "$downloaded_file" -d "$path"
 
-            # Move extracted contents up one level if there's an extra folder
+            # Move extracted files up if necessary
             extracted_folder=$(find "$path" -mindepth 1 -maxdepth 1 -type d | head -n 1)
             if [[ -d "$extracted_folder" && "$extracted_folder" != "$path" ]]; then
-                printf "Fixing directory structure: moving contents from %s to %s\n" "$extracted_folder" "$path"
+                echo "Fixing directory structure..." >&2
                 mv "$extracted_folder"/* "$path/"
                 rmdir "$extracted_folder"
             fi
 
-            # Recheck requirements.txt after moving files
-            if [[ ! -e $requirements ]]; then
-                new_requirements=$(find "$path" -name "requirements.txt" | head -n 1)
-                if [[ -n "$new_requirements" ]]; then
-                    requirements="$new_requirements"
-                fi
-            fi
-
-            # Check for requirements.txt
-            if [[ -e $requirements ]]; then
-                printf "Installing requirements for node: %s...\n" "$dir"
-                pip_install -r "$requirements" || { echo "Failed to install dependencies!"; exit 1; }
-            fi
-
-            # Clean up the archive after extraction
-            printf "Cleaning up: %s\n" "$(basename "$repo")"
             rm "$downloaded_file"
 
-            
-        else
-            # Handle Git repositories
-            printf "Downloading node: %s...\n" "$repo"
-            if [[ -d $path ]]; then
-                printf "Updating node: %s...\n" "$repo"
-                (cd "$path" && git pull)
-                if [[ -e $requirements ]]; then
-                    pip_install -r "$requirements"
-                fi
-            else
-                git clone "${repo}" "${path}" --recursive
-                if [[ -e $requirements ]]; then
-                    pip_install -r "$requirements"
-                fi
+            # Ensure GitPython is installed
+            if ! python3 -c "import git" &>/dev/null; then
+                echo "GitPython is missing. Installing now..." >&2
+                python3 -m pip install gitpython
+            fi
+
+            # Install requirements if present
+            if [[ -e $requirements ]]; then
+                echo "Installing dependencies from: $requirements" >&2
+                python3 -m pip install -r "$requirements"
             fi
         fi
     done
 }
+
+
+
+# # provisioning_get_nodes to get past released of confyui manager
+# function provisioning_get_nodes() {
+#     for repo in "${NODES[@]}"; do
+#         dir="${repo##*/}"  # Extract the last part of the URL or file name        
+#         path="/opt/ComfyUI/custom_nodes/${dir}"
+#         requirements="${path}/requirements.txt"
+#         printf "dir is equal to: %s\n" "$dir" >&2
+#         printf "path is equal to : %s\n" "$path" >&2
+#         printf "PWD is equal to : %s\n" "$PWD" >&2
+
+
+#         if [[ $repo =~ /archive/refs/tags/ ]]; then
+#             # Handle GitHub source code archive for tags
+#             printf "Downloading source code archive: %s...\n" "$repo"
+#             mkdir -p "$path"
+            
+#             downloaded_file="$path/$(basename "$repo")"
+#             printf "Showing download  of file : %s\n " "$(basename "$repo")"
+#             wget --show-progress --verbose -O "$downloaded_file" "$repo"
+#             unzip -qo "$downloaded_file" -d "$path"
+
+#             # Move extracted contents up one level if there's an extra folder
+#             extracted_folder=$(find "$path" -mindepth 1 -maxdepth 1 -type d | head -n 1)
+#             if [[ -d "$extracted_folder" && "$extracted_folder" != "$path" ]]; then
+#                 printf "Fixing directory structure: moving contents from %s to %s\n" "$extracted_folder" "$path"
+#                 mv "$extracted_folder"/* "$path/"
+#                 rmdir "$extracted_folder"
+#             fi
+
+#             # Recheck requirements.txt after moving files
+#             if [[ ! -e $requirements ]]; then
+#                 new_requirements=$(find "$path" -name "requirements.txt" | head -n 1)
+#                 if [[ -n "$new_requirements" ]]; then
+#                     requirements="$new_requirements"
+#                 fi
+#             fi
+
+#             # Check for requirements.txt
+#             if [[ -e $requirements ]]; then
+#                 printf "Installing requirements for node: %s...\n" "$dir"
+#                 pip_install -r "$requirements" || { echo "Failed to install dependencies!"; exit 1; }
+#             fi
+
+#             # Clean up the archive after extraction
+#             printf "Cleaning up: %s\n" "$(basename "$repo")"
+#             rm "$downloaded_file"
+
+            
+#         else
+#             # Handle Git repositories
+#             printf "Downloading node: %s...\n" "$repo"
+#             if [[ -d $path ]]; then
+#                 printf "Updating node: %s...\n" "$repo"
+#                 (cd "$path" && git pull)
+#                 if [[ -e $requirements ]]; then
+#                     pip_install -r "$requirements"
+#                 fi
+#             else
+#                 git clone "${repo}" "${path}" --recursive
+#                 if [[ -e $requirements ]]; then
+#                     pip_install -r "$requirements"
+#                 fi
+#             fi
+#         fi
+#     done
+# }
 
 
 #Deprecated fct
