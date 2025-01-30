@@ -26,8 +26,9 @@ PIP_PACKAGES=(
 )
 
 NODES=(
-    # "https://github.com/ltdrdata/ComfyUI-Manager"
     "https://github.com/ltdrdata/ComfyUI-Manager/archive/refs/tags/3.0.1.zip"
+    "https://github.com/ltdrdata/ComfyUI-Manager"
+
     # "https://github.com/ltdrdata/ComfyUI-Manager/releases/tag/3.0.1"
     # "https://github.com/ltdrdata/ComfyUI-Manager/archive/refs/tags/3.0.1.zip"
     "https://github.com/cubiq/ComfyUI_essentials"
@@ -284,16 +285,24 @@ function provisioning_get_nodes() {
             # wget --show-progress --verbose -O "$path/$(basename "$repo")" "$repo"
             wget --show-progress --verbose -O "$downloaded_file" "$repo"
             # unzip -qo "$downloaded_file" -d "$path"
-            unzip -qo "$downloaded_file" -d "$path" && mv "$path"/*/* "$path/" 2>/dev/null || true
+            unzip -qo "$downloaded_file" -d "$path"
 
-
-            # Fix the directory structure if extraction creates an extra subdirectory
-            extracted_folder=$(find "$path" -maxdepth 1 -type d -not -path "$path" | head -n 1)
-            if [[ -d "$extracted_folder" ]]; then
-                printf "Moving extracted contents from %s to %s\n" "$extracted_folder" "$path"
+            # Move extracted contents up one level if there's an extra folder
+            extracted_folder=$(find "$path" -mindepth 1 -maxdepth 1 -type d | head -n 1)
+            if [[ -d "$extracted_folder" && "$extracted_folder" != "$path" ]]; then
+                printf "Fixing directory structure: moving contents from %s to %s\n" "$extracted_folder" "$path"
                 mv "$extracted_folder"/* "$path/"
                 rmdir "$extracted_folder"
             fi
+
+
+            # # Fix the directory structure if extraction creates an extra subdirectory
+            # extracted_folder=$(find "$path" -maxdepth 1 -type d -not -path "$path" | head -n 1)
+            # if [[ -d "$extracted_folder" ]]; then
+            #     printf "Moving extracted contents from %s to %s\n" "$extracted_folder" "$path"
+            #     mv "$extracted_folder"/* "$path/"
+            #     rmdir "$extracted_folder"
+            # fi
             # Clean up the archive after extraction
             printf "Cleaning up: %s\n" "$(basename "$repo")"
             rm "$downloaded_file"
