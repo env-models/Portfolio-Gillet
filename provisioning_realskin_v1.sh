@@ -26,7 +26,8 @@ PIP_PACKAGES=(
 )
 
 NODES=(
-    "https://github.com/ltdrdata/ComfyUI-Manager"
+    # "https://github.com/ltdrdata/ComfyUI-Manager"
+    "https://github.com/ltdrdata/ComfyUI-Manager/archive/refs/tags/3.0.1.zip"
     # "https://github.com/ltdrdata/ComfyUI-Manager/releases/tag/3.0.1"
     # "https://github.com/ltdrdata/ComfyUI-Manager/archive/refs/tags/3.0.1.zip"
     "https://github.com/cubiq/ComfyUI_essentials"
@@ -298,51 +299,52 @@ function provisioning_get_pip_packages() {
 #provisioning_get_nodes to get past released of confyui manager
 function provisioning_get_nodes() {
     for repo in "${NODES[@]}"; do
-        # Extract the directory or file name from the URL
-        dir="${repo##*/}"  # Last part of URL
-        path="/opt/ComfyUI/custom_nodes/${dir%.*}"  # Remove file extensions (e.g., .zip, .tar.gz)
+        dir="${repo##*/}"  # Extract the last part of the URL or file name
+        path="${PWD}/custom_nodes/${dir%.*}"  # Use the current directory for downloading
         requirements="${path}/requirements.txt"
 
-        # if [[ $repo =~ /releases/download/ ]]; then
-        if [[ $repo =~ /archive/refs/tags/ ]]; then
-            # Handle downloadable release assets (e.g., ZIP files)
+        if [[ $repo =~ /releases/download/ ]]; then
+            # Handle downloadable release assets
             printf "Downloading release asset: %s...\n" "$repo"
-
-            # Create the target directory
             mkdir -p "$path"
+            wget -q -O "${PWD}/$dir" "$repo"
 
-            # Download the file
-            wget -q -O "/tmp/$dir" "$repo"
-
-            # Extract the file based on its extension
+            # Extract based on file extension
             if [[ $dir == *.zip ]]; then
-                unzip -qo "/tmp/$dir" -d "$path"
+                unzip -qo "${PWD}/$dir" -d "$path"
             elif [[ $dir == *.tar.gz ]]; then
-                tar -xzf "/tmp/$dir" -C "$path"
+                tar -xzf "${PWD}/$dir" -C "$path"
             fi
+            rm "${PWD}/$dir"
 
-            # Clean up the temporary file
-            rm "/tmp/$dir"
+            # Check for requirements.txt
+            if [[ -e $requirements ]]; then
+                printf "Installing requirements for node: %s...\n" "$dir"
+                pip_install -r "$requirements"
+            fi
+        elif [[ $repo =~ /archive/refs/tags/ ]]; then
+            # Handle GitHub source code archive for tags
+            printf "Downloading source code archive: %s...\n" "$repo"
+            mkdir -p "$path"
+            wget -q -O "${PWD}/$dir" "$repo"
+            unzip -qo "${PWD}/$dir" -d "$path"
+            rm "${PWD}/$dir"
 
-            # Install requirements if `requirements.txt` exists
+            # Check for requirements.txt
             if [[ -e $requirements ]]; then
                 printf "Installing requirements for node: %s...\n" "$dir"
                 pip_install -r "$requirements"
             fi
         else
-            # Handle regular Git repositories
+            # Handle Git repositories
             printf "Downloading node: %s...\n" "$repo"
             if [[ -d $path ]]; then
-                # If the directory exists, pull updates
-                if [[ ${AUTO_UPDATE,,} != "false" ]]; then
-                    printf "Updating node: %s...\n" "$repo"
-                    (cd "$path" && git pull)
-                    if [[ -e $requirements ]]; then
-                        pip_install -r "$requirements"
-                    fi
+                printf "Updating node: %s...\n" "$repo"
+                (cd "$path" && git pull)
+                if [[ -e $requirements ]]; then
+                    pip_install -r "$requirements"
                 fi
             else
-                # Clone the repository if it doesn't exist
                 git clone "${repo}" "${path}" --recursive
                 if [[ -e $requirements ]]; then
                     pip_install -r "$requirements"
@@ -351,6 +353,65 @@ function provisioning_get_nodes() {
         fi
     done
 }
+
+
+
+
+# function provisioning_get_nodes() {
+#     for repo in "${NODES[@]}"; do
+#         # Extract the directory or file name from the URL
+#         dir="${repo##*/}"  # Last part of URL
+#         path="/opt/ComfyUI/custom_nodes/${dir%.*}"  # Remove file extensions (e.g., .zip, .tar.gz)
+#         requirements="${path}/requirements.txt"
+
+#         # if [[ $repo =~ /releases/download/ ]]; then
+#         if [[ $repo =~ /archive/refs/tags/ ]]; then
+#             # Handle downloadable release assets (e.g., ZIP files)
+#             printf "Downloading release asset: %s...\n" "$repo"
+
+#             # Create the target directory
+#             mkdir -p "$path"
+
+#             # Download the file
+#             wget -q -O "/tmp/$dir" "$repo"
+
+#             # Extract the file based on its extension
+#             if [[ $dir == *.zip ]]; then
+#                 unzip -qo "/tmp/$dir" -d "$path"
+#             elif [[ $dir == *.tar.gz ]]; then
+#                 tar -xzf "/tmp/$dir" -C "$path"
+#             fi
+
+#             # Clean up the temporary file
+#             rm "/tmp/$dir"
+
+#             # Install requirements if `requirements.txt` exists
+#             if [[ -e $requirements ]]; then
+#                 printf "Installing requirements for node: %s...\n" "$dir"
+#                 pip_install -r "$requirements"
+#             fi
+#         else
+#             # Handle regular Git repositories
+#             printf "Downloading node: %s...\n" "$repo"
+#             if [[ -d $path ]]; then
+#                 # If the directory exists, pull updates
+#                 if [[ ${AUTO_UPDATE,,} != "false" ]]; then
+#                     printf "Updating node: %s...\n" "$repo"
+#                     (cd "$path" && git pull)
+#                     if [[ -e $requirements ]]; then
+#                         pip_install -r "$requirements"
+#                     fi
+#                 fi
+#             else
+#                 # Clone the repository if it doesn't exist
+#                 git clone "${repo}" "${path}" --recursive
+#                 if [[ -e $requirements ]]; then
+#                     pip_install -r "$requirements"
+#                 fi
+#             fi
+#         fi
+#     done
+# }
 
 
 
