@@ -267,6 +267,7 @@ function provisioning_get_nodes() {
     echo "Processing nodes: ${NODES[@]}" >&2  # Print all nodes before looping
 
     for repo in "${NODES[@]}"; do
+        echo "LIST ALL NODES : ${NODES[@]}" >&2  # Print all nodes before looping
         echo "DEBUG: Processing repo: $repo" >&2  # Debug statement
 
         dir=$(basename "$repo" .zip)  # Remove .zip extension from names
