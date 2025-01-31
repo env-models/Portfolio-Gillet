@@ -27,7 +27,8 @@ PIP_PACKAGES=(
 
 NODES=(
     # "https://github.com/ltdrdata/ComfyUI-Manager/archive/refs/tags/3.0.1.zip"
-    "https://github.com/env-models/confy_manager_clone"
+    # "https://github.com/env-models/confy_manager_clone"
+    "https://github.com/env-models/confyui_manager_v0"
     # "https://github.com/ltdrdata/ComfyUI-Manager"
 
     # "https://github.com/ltdrdata/ComfyUI-Manager/releases/tag/3.0.1"
