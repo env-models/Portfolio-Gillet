@@ -15,6 +15,7 @@ APT_PACKAGES=(
 )
 
 PIP_PACKAGES=(
+    "GitPython"
     # #"package-1"
     #  "pillow==10.2.0"
     #  "opencv-python>=4.8.0"
@@ -28,7 +29,7 @@ PIP_PACKAGES=(
 NODES=(
     # "https://github.com/ltdrdata/ComfyUI-Manager/archive/refs/tags/3.0.1.zip"
     # "https://github.com/env-models/confy_manager_clone"
-    "https://github.com/ltdrdata/ComfyUI-Manager"
+    # "https://github.com/ltdrdata/ComfyUI-Manager"
     "https://github.com/env-models/confyui_manager_v0"
 
     # "https://github.com/ltdrdata/ComfyUI-Manager/releases/tag/3.0.1"
@@ -171,8 +172,8 @@ function provisioning_start() {
 
     provisioning_print_header
     provisioning_get_apt_packages
-    provisioning_get_nodes
     provisioning_get_pip_packages
+    provisioning_get_nodes
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/ckpt" \
         "${CHECKPOINT_MODELS[@]}"
