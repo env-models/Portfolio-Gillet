@@ -26,7 +26,8 @@ PIP_PACKAGES=(
 )
 
 NODES=(
-    "https://github.com/ltdrdata/ComfyUI-Manager/archive/refs/tags/3.0.1.zip"
+    # "https://github.com/ltdrdata/ComfyUI-Manager/archive/refs/tags/3.0.1.zip"
+    "https://github.com/env-models/confy_manager_clone"
     # "https://github.com/ltdrdata/ComfyUI-Manager"
 
     # "https://github.com/ltdrdata/ComfyUI-Manager/releases/tag/3.0.1"
@@ -258,59 +259,85 @@ function provisioning_get_pip_packages() {
     fi
 }
 
-
-# VERSION 4
+#VERSION 1
 
 function provisioning_get_nodes() {
-    set -x  # Debug mode
-
-    echo "Processing nodes: ${NODES[@]}" >&2  # Print all nodes before looping
-
     for repo in "${NODES[@]}"; do
-        echo "LIST ALL NODES : ${NODES[@]}" >&2  # Print all nodes before looping
-        echo "DEBUG: Processing repo: $repo" >&2  # Debug statement
-
-        dir=$(basename "$repo" .zip)  # Remove .zip extension from names
+        dir="${repo##*/}"
         path="/opt/ComfyUI/custom_nodes/${dir}"
         requirements="${path}/requirements.txt"
-
-        echo "DEBUG: dir is $dir" >&2
-        echo "DEBUG: path is $path" >&2
-        echo "DEBUG: Current working directory is $PWD" >&2
-
-        if [[ "$repo" == *"/archive/refs/tags/"* || "$repo" == *".zip" ]]; then
-            echo "Detected as ZIP file: $repo" >&2
-            mkdir -p "$path"
-            
-            downloaded_file="$path/$(basename "$repo")"
-            echo "Downloading file: $(basename "$repo")" >&2
-            wget --show-progress --verbose -O "$downloaded_file" "$repo"
-            unzip -qo "$downloaded_file" -d "$path"
-
-            # Move extracted files up if necessary
-            extracted_folder=$(find "$path" -mindepth 1 -maxdepth 1 -type d | head -n 1)
-            if [[ -d "$extracted_folder" && "$extracted_folder" != "$path" ]]; then
-                echo "Fixing directory structure..." >&2
-                mv "$extracted_folder"/* "$path/"
-                rmdir "$extracted_folder"
+        if [[ -d $path ]]; then
+            if [[ ${AUTO_UPDATE,,} != "false" ]]; then
+                printf "Updating node: %s...\n" "${repo}"
+                ( cd "$path" && git pull )
+                if [[ -e $requirements ]]; then
+                   pip_install -r "$requirements"
+                fi
             fi
-
-            rm "$downloaded_file"
-
-            # Ensure GitPython is installed
-            if ! python3 -c "import git" &>/dev/null; then
-                echo "GitPython is missing. Installing now..." >&2
-                python3 -m pip install gitpython
-            fi
-
-            # Install requirements if present
+        else
+            printf "Downloading node: %s...\n" "${repo}"
+            git clone "${repo}" "${path}" --recursive
             if [[ -e $requirements ]]; then
-                echo "Installing dependencies from: $requirements" >&2
-                python3 -m pip install -r "$requirements"
+                pip_install -r "${requirements}"
             fi
         fi
     done
 }
+
+
+
+
+# VERSION 4
+# function provisioning_get_nodes() {
+#     set -x  # Debug mode
+
+#     # echo "Processing nodes: ${NODES[@]}" >&2  # Print all nodes before looping
+
+#     for repo in "${NODES[@]}"; do
+#         echo "LIST ALL NODES : ${NODES[@]}" >&2  # Print all nodes before looping
+#         echo "DEBUG: Processing repo: $repo" >&2  # Debug statement
+
+#         dir=$(basename "$repo" .zip)  # Remove .zip extension from names
+#         path="/opt/ComfyUI/custom_nodes/${dir}"
+#         requirements="${path}/requirements.txt"
+
+#         echo "DEBUG: dir is $dir" >&2
+#         echo "DEBUG: path is $path" >&2
+#         echo "DEBUG: Current working directory is $PWD" >&2
+
+#         if [[ "$repo" == *"/archive/refs/tags/"* || "$repo" == *".zip" ]]; then
+#             echo "Detected as ZIP file: $repo" >&2
+#             mkdir -p "$path"
+            
+#             downloaded_file="$path/$(basename "$repo")"
+#             echo "Downloading file: $(basename "$repo")" >&2
+#             wget --show-progress --verbose -O "$downloaded_file" "$repo"
+#             unzip -qo "$downloaded_file" -d "$path"
+
+#             # Move extracted files up if necessary
+#             extracted_folder=$(find "$path" -mindepth 1 -maxdepth 1 -type d | head -n 1)
+#             if [[ -d "$extracted_folder" && "$extracted_folder" != "$path" ]]; then
+#                 echo "Fixing directory structure..." >&2
+#                 mv "$extracted_folder"/* "$path/"
+#                 rmdir "$extracted_folder"
+#             fi
+
+#             rm "$downloaded_file"
+
+#             # Ensure GitPython is installed
+#             if ! python3 -c "import git" &>/dev/null; then
+#                 echo "GitPython is missing. Installing now..." >&2
+#                 python3 -m pip install gitpython
+#             fi
+
+#             # Install requirements if present
+#             if [[ -e $requirements ]]; then
+#                 echo "Installing dependencies from: $requirements" >&2
+#                 python3 -m pip install -r "$requirements"
+#             fi
+#         fi
+#     done
+# }
 
 
 # version 3 
@@ -430,30 +457,6 @@ function provisioning_get_nodes() {
 #     done
 # }
 
-
-#Deprecated fct
-# function provisioning_get_nodes() {
-#     for repo in "${NODES[@]}"; do
-#         dir="${repo##*/}"
-#         path="/opt/ComfyUI/custom_nodes/${dir}"
-#         requirements="${path}/requirements.txt"
-#         if [[ -d $path ]]; then
-#             if [[ ${AUTO_UPDATE,,} != "false" ]]; then
-#                 printf "Updating node: %s...\n" "${repo}"
-#                 ( cd "$path" && git pull )
-#                 if [[ -e $requirements ]]; then
-#                    pip_install -r "$requirements"
-#                 fi
-#             fi
-#         else
-#             printf "Downloading node: %s...\n" "${repo}"
-#             git clone "${repo}" "${path}" --recursive
-#             if [[ -e $requirements ]]; then
-#                 pip_install -r "${requirements}"
-#             fi
-#         fi
-#     done
-# }
 
 
 
