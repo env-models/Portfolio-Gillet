@@ -265,6 +265,7 @@ function provisioning_get_pip_packages() {
 # VERSION 4
 function provisioning_get_nodes() {
     set -x  # Debug mode
+    echo "Start downloading nodes"
 
     # echo "Processing nodes: ${NODES[@]}" >&2  # Print all nodes before looping
 
