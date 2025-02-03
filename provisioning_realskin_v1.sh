@@ -15,6 +15,7 @@ APT_PACKAGES=(
 )
 
 PIP_PACKAGES=(
+    "gitpython"
     # #"package-1"
     #  "pillow==10.2.0"
     #  "opencv-python>=4.8.0"
@@ -178,8 +179,9 @@ function provisioning_start() {
 
     provisioning_print_header
     provisioning_get_apt_packages
-    provisioning_get_nodes
     provisioning_get_pip_packages
+
+    provisioning_get_nodes
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/ckpt" \
         "${CHECKPOINT_MODELS[@]}"
