@@ -26,7 +26,12 @@ NODES=(
 )
 
 WORKFLOWS=(
+)
 
+
+CIVITAI_CHECKPOINT_MODELS=(
+    # "https://civitai.com/api/download/models/1074830"
+    1074830
 )
 
 CHECKPOINT_MODELS=(
@@ -34,20 +39,63 @@ CHECKPOINT_MODELS=(
     "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
 )
 
+IPADAPTER=(
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin"
+    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15.binx"    
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-portrait_sdxl.bin"
+    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
+
+    "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors"
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors"
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
+
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15_light_v11.bin"
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter_sdxl_vit-h.safetensors"
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
+    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus-face_sdxl_vit-h.safetensors"
+)
+
+INSIGHTFACE=(
+    "https://huggingface.co/ezioruan/inswapper_128.onnx/resolve/main/inswapper_128.onnx"
+    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/1k3d68.onnx"
+    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/2d106det.onnx"
+    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/det_10g.onnx"
+    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/genderage.onnx"
+    "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/w600k_r50.onnx"
+)
+
 UNET_MODELS=(
 )
 
 LORA_MODELS=(
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15_lora.safetensors"
 )
 
 VAE_MODELS=(
+    "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
+    "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
+    "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+    # "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors"
+    # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
 )
 
 ESRGAN_MODELS=(
 )
 
 CONTROLNET_MODELS=(
+    "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors"
 )
+
+CLIP=(
+    "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
+    "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
+)
+
+CLIP_VISION=(
+    "https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/resolve/main/model.safetensors"
+)
+
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
@@ -59,6 +107,9 @@ function provisioning_start() {
     provisioning_get_files \
         "${COMFYUI_DIR}/models/checkpoints" \
         "${CHECKPOINT_MODELS[@]}"
+    provisioning_get_files \
+        "${COMFYUI_DIR}/models/ipadapter" \
+        "${IPADAPTER[@]}"
     provisioning_get_files \
         "${COMFYUI_DIR}/models/unet" \
         "${UNET_MODELS[@]}"
@@ -74,6 +125,20 @@ function provisioning_start() {
     provisioning_get_files \
         "${COMFYUI_DIR}/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
+    provisioning_has_valid_civitai_token \
+        "${COMFYUI_DIR}/models/checkpoints" \
+        "${CIVITAI_CHECKPOINT_MODELS[@]}"
+    provisioning_get_files \
+        "${COMFYUI_DIR}/models/clip" \
+        "${CLIP[@]}"
+    provisioning_get_files \
+        "${COMFYUI_DIR}/models/clip_vision" \
+        "${CLIP_VISION[@]}"
+    provisioning_get_files \
+        "${COMFYUI_DIR}/models/insightface" \
+        "${INSIGHTFACE[@]}"
+        
+        
     provisioning_print_end
 }
 
@@ -208,6 +273,48 @@ function provisioning_download() {
         wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
     fi
 }
+
+function provisioning_has_valid_civitai_token() {
+    # Hardcoded Civitai token
+    local CIVITAI_TOKEN="8d3612baaafd4ed9db408ff955a3f87c"
+
+    local target_directory="${1:-}"
+    local model_id="${2:-}"
+
+    # Ensure the target directory is provided
+    if [[ -z "$target_directory" ]]; then
+        echo "Error: Target directory is required as the first argument." >&2
+        return 1
+    fi
+
+    # Ensure the model ID or name is provided
+    if [[ -z "$model_id" ]]; then
+        echo "Error: Model ID or name is required as the second argument." >&2
+        return 1
+    fi
+
+    # Ensure the target directory exists
+    mkdir -p "$target_directory"
+
+    # Construct the URL for downloading the model
+    local url="https://civitai.com/api/download/models/$model_id"
+    local output_file="$target_directory/$model_id.safetensors"
+
+    # Attempt to download the model
+    echo "Downloading model ID: $model_id to directory: $target_directory"
+    curl -H "Authorization: Bearer $CIVITAI_TOKEN" \
+         -L -o "$output_file" \
+         "$url"
+
+    if [[ $? -eq 0 ]]; then
+        echo "Model downloaded successfully: $output_file"
+        return 0
+    else
+        echo "Error: Failed to download model with ID $model_id" >&2
+        return 1
+    fi
+}
+
 
 # Allow user to disable provisioning if they started with a script they didn't want
 if [[ ! -f /.noprovisioning ]]; then
