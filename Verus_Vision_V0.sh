@@ -55,7 +55,13 @@ IPADAPTER=(
     "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
     "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus-face_sdxl_vit-h.safetensors"
 
+    # "https://huggingface.co/XLabs-AI/flux-ip-adapter/resolve/main/ip_adapter.safetensors"
+)
+
+IPADAPTER_FLUX=(
     "https://huggingface.co/XLabs-AI/flux-ip-adapter/resolve/main/ip_adapter.safetensors"
+    "https://huggingface.co/InstantX/FLUX.1-dev-IP-Adapter/resolve/main/ip-adapter.bin"
+
 )
 
 INSIGHTFACE=(
@@ -68,7 +74,8 @@ INSIGHTFACE=(
 )
 
 UNET_MODELS=(
-    "https://huggingface.co/SG161222/Verus_Vision_1.0b/resolve/main/VerusVision_1.0b_Transformer_fp16.safetensors"
+    # "https://huggingface.co/SG161222/Verus_Vision_1.0b/resolve/main/VerusVision_1.0b_Transformer_fp16.safetensors"
+    "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/flux1-schnell.safetensors"
 )
 
 LORA_MODELS=(
@@ -141,7 +148,9 @@ function provisioning_start() {
     provisioning_get_files \
         "${COMFYUI_DIR}/models/insightface" \
         "${INSIGHTFACE[@]}"
-        
+    provisioning_get_files \
+        "${COMFYUI_DIR}/models/ipadapter-flux" \
+        "${IPADAPTER_FLUX[@]}"
         
     provisioning_print_end
 }
