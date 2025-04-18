@@ -92,6 +92,7 @@ VAE_MODELS=(
 )
 
 ESRGAN_MODELS=(
+"https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
 )
 
 CONTROLNET_MODELS=(
