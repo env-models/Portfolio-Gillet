@@ -82,6 +82,7 @@ LORA_MODELS=(
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15_lora.safetensors"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl_lora.safetensors"
     "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sdxl_lora.safetensors"
+    "https://huggingface.co/XLabs-AI/flux-RealismLora/resolve/main/lora.safetensors"
 )
 
 VAE_MODELS=(
