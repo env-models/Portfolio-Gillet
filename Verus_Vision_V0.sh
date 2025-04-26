@@ -114,7 +114,11 @@ UPSCALE_MODELS=(
 PULID=(
     "https://huggingface.co/guozinan/PuLID/resolve/main/pulid_flux_v0.9.0.safetensors"
 )
-    
+
+ULTRALYTICS=(
+    "https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"
+    "https://huggingface.co/Bingsu/adetailer/resolve/main/hand_yolov8s.pt"
+)
 
 CONTROLNET_MODELS=(
     # "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_canny_mid.safetensors"
@@ -174,10 +178,12 @@ function provisioning_start() {
     provisioning_get_files \
         "${COMFYUI_DIR}/models/insightface" \
         "${INSIGHTFACE[@]}"
-
     provisioning_get_files \
         "${COMFYUI_DIR}/models/insightface/models/antelopev2" \
         "${INSIGHTFACE2[@]}"
+    provisioning_get_files \
+        "${COMFYUI_DIR}/models/ultralytics/bbox" \
+        "${ULTRALYTICS[@]}"
         
     provisioning_get_files \
         "${COMFYUI_DIR}/models/ipadapter-flux" \
