@@ -24,6 +24,7 @@ NODES=(
     "https://github.com/cubiq/ComfyUI_InstantID"
     "https://github.com/cubiq/ComfyUI_FaceAnalysis"
     "https://github.com/alessandrozonta/ComfyUI-OpenPose"
+    "https://github.com/lldacing/ComfyUI_PuLID_Flux_ll"
 )
 
 WORKFLOWS=(
