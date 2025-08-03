@@ -30,6 +30,19 @@ NODES=(
 WORKFLOWS=(
 )
 
+# https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors
+# https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan2.2_vae.safetensors
+# https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors
+
+
+
+TEXT_ENCODERS=(
+        "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+)
+
+DIFFUSION_MODELS=(
+        "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors"
+)
 
 CIVITAI_CHECKPOINT_MODELS=(
     # "https://civitai.com/api/download/models/1074830"
@@ -39,49 +52,10 @@ CIVITAI_CHECKPOINT_MODELS=(
 CHECKPOINT_MODELS=(
     # "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
     "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
-    "https://huggingface.co/RunDiffusion/Juggernaut-XI-v11/resolve/main/Juggernaut-XI-byRunDiffusion.safetensors"
+    # "https://huggingface.co/RunDiffusion/Juggernaut-XI-v11/resolve/main/Juggernaut-XI-byRunDiffusion.safetensors"
 )
 
-IPADAPTER=(
-    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin"
-    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15.binx"    
-    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-portrait_sdxl.bin"
-    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
 
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
-
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15_light_v11.bin"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter_sdxl_vit-h.safetensors"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
-    # "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus-face_sdxl_vit-h.safetensors"
-
-)
-
-IPADAPTER_FLUX=(
-    # "https://huggingface.co/XLabs-AI/flux-ip-adapter/resolve/main/ip_adapter.safetensors"
-    # "https://huggingface.co/InstantX/FLUX.1-dev-IP-Adapter/resolve/main/ip-adapter.bin"
-
-)
-
-INSIGHTFACE=(
-    # "https://huggingface.co/ezioruan/inswapper_128.onnx/resolve/main/inswapper_128.onnx"
-    # "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/1k3d68.onnx"
-    # "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/2d106det.onnx"
-    # "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/det_10g.onnx"
-    # "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/genderage.onnx"
-    # "https://huggingface.co/public-data/insightface/resolve/main/models/buffalo_l/w600k_r50.onnx"
-)
-
-INSIGHTFACE2=(
-    # "https://huggingface.co/MonsterMMORPG/tools/resolve/main/1k3d68.onnx"
-    # "https://huggingface.co/MonsterMMORPG/tools/resolve/main/2d106det.onnx"
-    # "https://huggingface.co/MonsterMMORPG/tools/resolve/main/genderage.onnx"
-    # "https://huggingface.co/MonsterMMORPG/tools/resolve/main/glintr100.onnx"
-    # "https://huggingface.co/MonsterMMORPG/tools/resolve/main/scrfd_10g_bnkps.onnx"
-)
 
 UNET_MODELS=(
     # "https://huggingface.co/SG161222/Verus_Vision_1.0b/resolve/main/VerusVision_1.0b_Transformer_fp16.safetensors"
@@ -100,8 +74,10 @@ LORA_MODELS=(
 VAE_MODELS=(
     # "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
     # "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
-    "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
-    "https://huggingface.co/SG161222/Verus_Vision_1.0b/resolve/main/ae.safetensors"
+    # "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+    "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan2.2_vae.safetensors"
+
+    # "https://huggingface.co/SG161222/Verus_Vision_1.0b/resolve/main/ae.safetensors"
     # "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors"
     # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
 )
@@ -114,16 +90,6 @@ UPSCALE_MODELS=(
     # "https://huggingface.co/gemasai/4x_NMKD-Superscale-SP_178000_G/resolve/main/4x_NMKD-Superscale-SP_178000_G.pth"
     "https://huggingface.co/airomix/models/resolve/959e06106e9a212f2137ac145e6a2d6919ac1d56/4x-NMKD-Superscale.pt"
     # "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
-)
-
-
-PULID=(
-    # "https://huggingface.co/guozinan/PuLID/resolve/main/pulid_flux_v0.9.0.safetensors"
-)
-
-ULTRALYTICS=(
-    # "https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"
-    # "https://huggingface.co/Bingsu/adetailer/resolve/main/hand_yolov8s.pt"
 )
 
 CONTROLNET_MODELS=(
@@ -142,7 +108,7 @@ CLIP=(
 )
 
 CLIP_VISION=(
-    "https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/resolve/main/model.safetensors"
+    # "https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/resolve/main/model.safetensors"
 )
 
 
@@ -153,6 +119,12 @@ function provisioning_start() {
     provisioning_get_apt_packages
     provisioning_get_nodes
     provisioning_get_pip_packages
+    provisioning_get_files \
+        "${COMFYUI_DIR}/models/text_encoders" \
+        "${TEXT_ENCODERS[@]}"
+    provisioning_get_files \
+        "${COMFYUI_DIR}/models/diffusion_models" \
+        "${DIFFUSION_MODELS[@]}"
     provisioning_get_files \
         "${COMFYUI_DIR}/models/checkpoints" \
         "${CHECKPOINT_MODELS[@]}"
