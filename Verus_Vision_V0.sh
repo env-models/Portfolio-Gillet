@@ -35,6 +35,11 @@ CIVITAI_CHECKPOINT_MODELS=(
     # "https://civitai.com/api/download/models/1074830"
     # 1074830
 )
+    # "https://civitai.com/api/download/models/993999?type=Model&format=SafeTensor"
+
+CIVITAI_LORA_MODELS=(
+    993999
+)
 
 CHECKPOINT_MODELS=(
     # "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
@@ -45,8 +50,8 @@ CHECKPOINT_MODELS=(
 IPADAPTER=(
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15.bin"
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15.binx"    
-    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-portrait_sdxl.bin"
-    # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-portrait_sdxl.bin"
+    "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
 
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
     # "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors"
@@ -139,6 +144,7 @@ CLIP=(
     "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors"
     "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors"
     "https://huggingface.co/QuanSun/EVA-CLIP/resolve/main/EVA02_CLIP_L_336_psz14_s6B.pt"
+    "https://huggingface.co/BAAI/EVA-CLIP-18B/resolve/main/EVA_CLIP_18B_psz14_s6B.fp16.pt"
 )
 
 CLIP_VISION=(
@@ -177,6 +183,9 @@ function provisioning_start() {
     provisioning_has_valid_civitai_token \
         "${COMFYUI_DIR}/models/checkpoints" \
         "${CIVITAI_CHECKPOINT_MODELS[@]}"
+    provisioning_has_valid_civitai_token \
+        "${COMFYUI_DIR}/models/lora" \
+        "${CIVITAI_LORA_MODELS[@]}"
     provisioning_get_files \
         "${COMFYUI_DIR}/models/clip" \
         "${CLIP[@]}"
