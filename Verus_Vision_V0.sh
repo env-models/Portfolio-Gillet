@@ -37,9 +37,9 @@ CIVITAI_CHECKPOINT_MODELS=(
 )
     # "https://civitai.com/api/download/models/993999?type=Model&format=SafeTensor"
 
-CIVITAI_LORA_MODELS=(
-    993999
-)
+# CIVITAI_LORA_MODELS=(
+#     993999
+# )
 
 CHECKPOINT_MODELS=(
     # "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
@@ -183,9 +183,7 @@ function provisioning_start() {
     provisioning_has_valid_civitai_token \
         "${COMFYUI_DIR}/models/checkpoints" \
         "${CIVITAI_CHECKPOINT_MODELS[@]}"
-    provisioning_has_valid_civitai_token \
-        "${COMFYUI_DIR}/models/lora" \
-        "${CIVITAI_LORA_MODELS[@]}"
+
     provisioning_get_files \
         "${COMFYUI_DIR}/models/clip" \
         "${CLIP[@]}"
