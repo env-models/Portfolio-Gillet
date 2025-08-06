@@ -100,6 +100,9 @@ LORA_MODELS=(
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl_lora.safetensors"
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sdxl_lora.safetensors"
     "https://huggingface.co/XLabs-AI/flux-RealismLora/resolve/main/lora.safetensors"
+    "https://huggingface.co/strangerzonehf/Flux-Super-Realism-LoRA/resolve/main/super-realism.safetensors"
+    "https://huggingface.co/dvyio/flux-lora-close-portrait/resolve/main/88e193429baa46ba89d6c6da9486268e_pytorch_lora_weights.safetensors"
+    "https://huggingface.co/Kijai/flux-loras-comfyui/blob/main/xlabs/xlabs_flux_realism_lora_comfui.safetensors"
 )
 
 VAE_MODELS=(
