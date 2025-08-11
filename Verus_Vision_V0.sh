@@ -35,11 +35,7 @@ CIVITAI_CHECKPOINT_MODELS=(
     # "https://civitai.com/api/download/models/1074830"
     # 1074830
 )
-    # "https://civitai.com/api/download/models/993999?type=Model&format=SafeTensor"
 
-# CIVITAI_LORA_MODELS=(
-#     993999
-# )
 
 CHECKPOINT_MODELS=(
     # "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
@@ -92,6 +88,7 @@ UNET_MODELS=(
     # "https://huggingface.co/SG161222/Verus_Vision_1.0b/resolve/main/VerusVision_1.0b_Transformer_fp16.safetensors"
     # "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/flux1-schnell.safetensors"
     "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
+    # "https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/flux1-krea-dev.safetensors"
 )
 
 LORA_MODELS=(
@@ -112,6 +109,7 @@ VAE_MODELS=(
     # "https://huggingface.co/SG161222/Verus_Vision_1.0b/resolve/main/ae.safetensors"
     # "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors"
     "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors"
+    # "https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/ae.safetensors"
 )
 
 
@@ -126,7 +124,8 @@ UPSCALE_MODELS=(
 
 
 PULID=(
-    "https://huggingface.co/guozinan/PuLID/resolve/main/pulid_flux_v0.9.0.safetensors"
+    # "https://huggingface.co/guozinan/PuLID/resolve/main/pulid_flux_v0.9.0.safetensors"
+    "https://huggingface.co/guozinan/PuLID/resolve/main/pulid_flux_v0.9.1.safetensors"
 )
 
 ULTRALYTICS=(
