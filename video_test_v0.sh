@@ -62,7 +62,8 @@ CHECKPOINT_MODELS=(
     # "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
     # "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/DreamShaper_8_pruned.safetensors"
     # "https://huggingface.co/RunDiffusion/Juggernaut-XI-v11/resolve/main/Juggernaut-XI-byRunDiffusion.safetensors"
-    "https://huggingface.co/Phr00t/WAN2.2-14B-Rapid-AllInOne/resolve/main/v6/wan2.2-i2v-rapid-aio-v6.safetensors"
+    # "https://huggingface.co/Phr00t/WAN2.2-14B-Rapid-AllInOne/resolve/main/v6/wan2.2-i2v-rapid-aio-v6.safetensors"
+    "https://huggingface.co/Phr00t/WAN2.2-14B-Rapid-AllInOne/resolve/main/v2/wan2.2-i2v-aio-v2.safetensors"
 )
 
 
