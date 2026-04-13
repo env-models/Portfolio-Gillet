@@ -94,10 +94,10 @@ INSIGHTFACE2=(
 UNET_MODELS=(
     # FLUX.1-Krea-dev fp8 — 11.9 GB, runs on 24 GB VRAM, minimal quality loss vs bf16
     # NOTE: requires HF account + licence agreement at huggingface.co/black-forest-labs/FLUX.1-Krea-dev
-    "https://huggingface.co/Comfy-Org/FLUX.1-Krea-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-krea-dev_fp8_scaled.safetensors"
+    #"https://huggingface.co/Comfy-Org/FLUX.1-Krea-dev_ComfyUI/resolve/main/split_files/diffusion_models/flux1-krea-dev_fp8_scaled.safetensors"
 
     # FLUX.1-Krea-dev bf16 full — 23.8 GB, best quality, needs 24+ GB VRAM with offloading
-    # "https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/flux1-krea-dev.safetensors"
+    "https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/flux1-krea-dev.safetensors"
 
     # FLUX.1-dev bf16 — alternative base, better for LoRA training
     # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
