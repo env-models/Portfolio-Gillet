@@ -47,9 +47,8 @@ WORKFLOWS=(
 
 
 CIVITAI_CHECKPOINT_MODELS=(
-    # "https://civitai.com/api/download/models/1074830"
+     "https://civitai.com/api/download/models/2805234"
 )
-
 
 CHECKPOINT_MODELS=(
     # DreamShaper removed — SDXL checkpoint not needed for FLUX-only workflow
@@ -99,6 +98,9 @@ UNET_MODELS=(
     # FLUX.1-Krea-dev bf16 full — 23.8 GB, best quality, needs 24+ GB VRAM with offloading
     "https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/flux1-krea-dev.safetensors"
 
+    # uncensored for flux - TRIAL
+    "https://huggingface.co/lodestones/Chroma1-HD/resolve/main/Chroma1-HD.safetensors"
+    
     # FLUX.1-dev bf16 — alternative base, better for LoRA training
     # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
 )
