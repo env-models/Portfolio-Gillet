@@ -22,7 +22,7 @@ NODES=(
 
     # Character identity — primary stack
     "https://github.com/jax-explorer/ComfyUI-InstantCharacter"    # NEW: full-body character consistency (Tencent, Apr 2025)
-    "https://github.com/balazik/ComfyUI-PuLID-Flux-Enhanced"       # PuLID-Flux-Enhanced (PulidEvaClipLoader, ApplyPulidFlux etc.)
+    "https://github.com/sipie800/ComfyUI-PuLID-Flux-Enhanced"       # PuLID-Flux-Enhanced (PulidEvaClipLoader, ApplyPulidFlux etc.)
     "https://github.com/cubiq/ComfyUI_FaceAnalysis"               # InsightFace face analysis (required by PuLID)
 
     # ControlNet & preprocessors
