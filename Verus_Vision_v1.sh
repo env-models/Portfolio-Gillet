@@ -109,7 +109,10 @@ LORA_MODELS=(
     # Realism stack — stack both for photorealistic skin and lighting
     "https://huggingface.co/XLabs-AI/flux-RealismLora/resolve/main/lora.safetensors"
     "https://huggingface.co/strangerzonehf/Flux-Super-Realism-LoRA/resolve/main/super-realism.safetensors"
-
+    
+    # ⭐ Character LoRA — Kia / trigger word: kiaVV6202uxulf (PRIVATE REPO — requires HF_TOKEN)
+    "https://huggingface.co/Raph007934/kia-lora-private/resolve/main/koz-BL9DLXTq4-ALx9HzQ_pytorch_lora_weights.safetensors"
+    
     # Close portrait — tightens face framing for portrait shots
    # "https://huggingface.co/dvyio/flux-lora-close-portrait/resolve/main/88e193429baa46ba89d6c6da9486268e_pytorch_lora_weights.safetensors"
 
