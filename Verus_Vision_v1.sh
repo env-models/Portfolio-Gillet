@@ -47,7 +47,7 @@ WORKFLOWS=(
 
 
 CIVITAI_CHECKPOINT_MODELS=(
-     "https://civitai.com/api/download/models/2805234"
+     #"https://civitai.com/api/download/models/2805234"
 )
 
 CHECKPOINT_MODELS=(
@@ -99,7 +99,7 @@ UNET_MODELS=(
     "https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev/resolve/main/flux1-krea-dev.safetensors"
 
     # uncensored for flux - TRIAL
-    "https://huggingface.co/lodestones/Chroma1-HD/resolve/main/Chroma1-HD.safetensors"
+    #"https://huggingface.co/lodestones/Chroma1-HD/resolve/main/Chroma1-HD.safetensors"
     
     # FLUX.1-dev bf16 — alternative base, better for LoRA training
     # "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors"
@@ -111,7 +111,7 @@ LORA_MODELS=(
     "https://huggingface.co/strangerzonehf/Flux-Super-Realism-LoRA/resolve/main/super-realism.safetensors"
 
     # Close portrait — tightens face framing for portrait shots
-    "https://huggingface.co/dvyio/flux-lora-close-portrait/resolve/main/88e193429baa46ba89d6c6da9486268e_pytorch_lora_weights.safetensors"
+   # "https://huggingface.co/dvyio/flux-lora-close-portrait/resolve/main/88e193429baa46ba89d6c6da9486268e_pytorch_lora_weights.safetensors"
 
     # Old SDXL FaceID LoRAs removed — incompatible with FLUX
     # "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid_sd15_lora.safetensors"
