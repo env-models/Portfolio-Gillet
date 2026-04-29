@@ -10,6 +10,8 @@ APT_PACKAGES=(
 )
 
 PIP_PACKAGES=(
+    "setuptools"
+
     # No insightface/onnxruntime needed — PuLID not used in post-processing
 )
 
