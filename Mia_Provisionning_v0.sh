@@ -137,7 +137,8 @@ UPSCALE_MODELS=(
     "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
 
     # Skin texture reconstruction — used in v6_skin workflow (UltimateSDUpscale pass)
-    "https://huggingface.co/Antumbra/models/resolve/main/1x-ITF-SkinDiffDetail.safetensors"
+    #"https://huggingface.co/Antumbra/models/resolve/main/1x-ITF-SkinDiffDetail.safetensors"
+    "https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/1x-ITF-SkinDiffDetail-Lite-v1.pth"
 
     # General fallback
     "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
