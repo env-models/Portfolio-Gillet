@@ -2,6 +2,13 @@
 <br>
 <br>
 
+## Beating the tennis betting market - predicting the bookmaker's error with XGBoost
+
+[GitHub](https://github.com/env-models/tennis-market-residual) · [nbviewer](https://nbviewer.org/github/env-models/tennis-market-residual/blob/main/notebooks/07_residual_model.ipynb)
+
+Can a model built from public match data beat Pinnacle, the sharpest bookmaker, at predicting ATP matches? Six model families trained on 107 leak-free features all lost to the market head-on. Reframing the problem worked: instead of predicting the match, the model predicts the market's error, using the bookmaker's de-vigged log-odds as XGBoost's base_margin. It beats the market on log loss in 9 of 9 walk-forward seasons (~22,000 matches). The project includes leakage audits, a bit-for-bit reproduction check, documented negative results, and a live forward test that uncovered and fixed a train/serve skew.
+
+
 ## An hydro-morphological analysis of erosion processes along the south-west french coastline.
 
 [nbviewer](https://nbviewer.jupyter.org/github/env-models/Beach_erosion/blob/master/Storm%20Impact%20Indicator_2.ipynb)
