@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Raphael Gillet — Data Scientist</title>
+  <meta name="description" content="Portfolio of Raphael Gillet, data scientist. Projects on beating the tennis betting market with XGBoost, storm erosion on the French coast, and plasmid lab-of-origin attribution with a CNN.">
+  <meta name="theme-color" content="#0b0b0c">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://env-models.github.io/Portfolio-Gillet/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Raphael Gillet — Data Scientist">
+  <meta property="og:description" content="Turning noisy real-world data into models that survive contact with reality. Projects, publications and contact.">
+  <meta property="og:url" content="https://env-models.github.io/Portfolio-Gillet/">
+  <meta property="og:site_name" content="Raphael Gillet">
+  <meta property="og:image" content="https://env-models.github.io/Portfolio-Gillet/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Raphael Gillet, data scientist: large white name on a near-black background over a faint network of drifting data points.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0c'/%3E%3Ctext x='32' y='42' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='26' font-weight='700' letter-spacing='-1' text-anchor='middle' fill='%236db3ff'%3ERG%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar" id="top">
+    <a class="brand" href="#top">
+      <span class="brand__full">Raphael Gillet</span>
+      <span class="brand__short" aria-hidden="true">RG</span>
+    </a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ========== HERO ========== -->
+    <section class="section hero" aria-labelledby="hero-title">
+      <canvas class="hero__canvas" aria-hidden="true"></canvas>
+      <div class="container hero__content">
+        <p class="eyebrow reveal" style="--i:0">Data scientist</p>
+        <h1 id="hero-title" class="hero__title reveal" style="--i:1">Raphael<br>Gillet</h1>
+        <p class="hero__lede reveal" style="--i:2">Turning noisy real-world data into models that survive contact with reality.</p>
+        <div class="actions reveal" style="--i:3">
+          <a class="btn btn--primary" href="#projects">Projects</a>
+          <a class="btn btn--ghost" href="assets/Resume_Gillet_2026.pdf" target="_blank" rel="noopener noreferrer">CV</a>
+          <a class="btn btn--ghost" href="https://github.com/env-models" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+      <a class="hero__cue" href="#projects" aria-label="Scroll to projects">Scroll</a>
+    </section>
+
+    <div id="projects" class="projects">
+
+      <!-- ========== 01 TENNIS ========== -->
+      <section class="section project" aria-labelledby="p1-title">
+        <div class="project__index" aria-hidden="true" data-parallax="-0.06">01</div>
+        <div class="container project__inner">
+          <div class="project__text">
+            <p class="eyebrow reveal" style="--i:0">01 — Project · XGBoost, walk-forward validation</p>
+            <h2 id="p1-title" class="project__title reveal" style="--i:1">Beating the tennis betting market</h2>
+            <p class="project__subtitle reveal" style="--i:2">Predicting the bookmaker's error instead of the match</p>
+            <div class="project__summary reveal" style="--i:3">
+              <p>Can a model built from public match data beat Pinnacle, the sharpest bookmaker, at predicting ATP matches? Head-on, no: six model families trained on 107 leak-free features all lost to the market, and their errors correlated at 0.99, pointing to an information ceiling.</p>
+              <p>Reframing the problem worked: the model predicts the market's error rather than the match, using the bookmaker's de-vigged log-odds as XGBoost's <code>base_margin</code>, and beats the market on log loss in 9 of 9 walk-forward seasons (~22,000 matches). Also included: leakage audits, a bit-for-bit reproduction check, documented negative results, and a live forward test that uncovered and fixed a train/serve skew.</p>
+            </div>
+            <ul class="stats stats--2x2 reveal" style="--i:4">
+              <li class="stat">
+                <span class="stat__value count" data-target="9" data-suffix="/9" aria-live="off">9/9</span>
+                <span class="stat__label">walk-forward seasons beaten</span>
+              </li>
+              <li class="stat">
+                <span class="stat__value count" data-target="22000" data-prefix="~" aria-live="off">~22,000</span>
+                <span class="stat__label">test matches, 2017–2025</span>
+              </li>
+              <li class="stat">
+                <span class="stat__value count" data-target="6" aria-live="off">6</span>
+                <span class="stat__label">model families that lost to the market</span>
+              </li>
+              <li class="stat">
+                <span class="stat__value count" data-target="107" aria-live="off">107</span>
+                <span class="stat__label">leak-free features</span>
+              </li>
+            </ul>
+            <p class="project__links reveal" style="--i:5">
+              <a class="link-arrow" href="https://github.com/env-models/tennis-market-residual" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+              <a class="link-arrow" href="https://nbviewer.org/github/env-models/tennis-market-residual/blob/main/notebooks/07_residual_model.ipynb" target="_blank" rel="noopener noreferrer">Notebook</a>
+            </p>
+          </div>
+          <div class="project__visual" data-parallax="0.07">
+            <figure class="figure reveal" style="--i:2">
+              <a class="figure__link" href="assets/tennis-seasons-1364.webp" target="_blank" rel="noopener" aria-label="Open full-size chart">
+                <div class="figure-card">
+                  <picture>
+                    <!-- narrow screens: only the difference panel, so the bars stay legible -->
+                    <source media="(max-width: 959px)" srcset="assets/tennis-seasons-mobile.webp" width="684" height="473">
+                    <source type="image/webp" srcset="assets/tennis-seasons-800.webp 800w, assets/tennis-seasons-1364.webp 1364w" sizes="min(42vw, 580px)">
+                    <img src="assets/tennis-seasons-1364.webp" width="1364" height="473" loading="lazy" decoding="async" alt="Bar chart of log-loss difference per season, 2017–2025; eight bars below zero (better than the market), 2023 slightly above. The wide version also shows both per-season log-loss lines, market in orange and residual model in blue, almost on top of each other.">
+                  </picture>
+                </div>
+              </a>
+              <figcaption>Per-season log loss, Pinnacle vs the residual model (notebook 07). Below zero on the right = better than the market. The final recipe (notebook 09) wins all nine seasons.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 02 STORM EROSION ========== -->
+      <section class="section project project--alt" aria-labelledby="p2-title">
+        <div class="project__index" aria-hidden="true" data-parallax="-0.06">02</div>
+        <div class="container project__inner">
+          <div class="project__text">
+            <p class="eyebrow reveal" style="--i:0">02 — Project · Coastal geomorphology, hydroclimatic data</p>
+            <h2 id="p2-title" class="project__title reveal" style="--i:1">Storm erosion analysis</h2>
+            <p class="project__subtitle reveal" style="--i:2">A hydro-morphological analysis of erosion processes along the south-west French coastline</p>
+            <div class="project__summary reveal" style="--i:3">
+              <p>Storm-induced erosion processes are still a research topic. This analysis aims at understanding how a storm energy variable, based on wave height and storm duration, correlates with the volume of eroded beach.</p>
+              <p>Taking as input 5 years of hydroclimatic model data and 162 ground surveys at Truc Vert (France), it was designed as a basic model before a local early-warning system could be implemented.</p>
+            </div>
+            <ul class="stats reveal" style="--i:4">
+              <li class="stat">
+                <span class="stat__value count" data-target="162" aria-live="off">162</span>
+                <span class="stat__label">beach surveys at Truc Vert</span>
+              </li>
+              <li class="stat">
+                <span class="stat__value count" data-target="5" aria-live="off">5</span>
+                <span class="stat__label">years of hydroclimatic model data</span>
+              </li>
+            </ul>
+            <p class="project__links reveal" style="--i:5">
+              <a class="link-arrow" href="https://github.com/env-models/Beach_erosion" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+              <a class="link-arrow" href="https://nbviewer.org/github/env-models/Beach_erosion/blob/master/Storm%20Impact%20Indicator_2.ipynb" target="_blank" rel="noopener noreferrer">Notebook</a>
+            </p>
+          </div>
+          <div class="project__visual" data-parallax="0.07">
+            <figure class="figure reveal" style="--i:2">
+              <div class="figure-card figure-card--dark">
+                <svg class="beach" viewBox="0 0 640 320" role="img" aria-labelledby="beach-title beach-desc" xmlns="http://www.w3.org/2000/svg">
+                  <title id="beach-title">Stylised beach cross-section before and after a storm</title>
+                  <desc id="beach-desc">A dune and beach profile with the sea on the right. The solid line is the pre-storm profile, the dashed line the post-storm profile, and the shaded wedge between them is the eroded volume. Dots mark survey points.</desc>
+                  <!-- sea (two wave layers, drawn first so the sand covers it on land) -->
+                  <g class="beach__sea">
+                    <path class="beach__wave beach__wave--2" d="M-160 222 q20 -7 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 V320 H-160 Z"/>
+                    <path class="beach__wave beach__wave--1" d="M-160 214 q20 -7 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 V320 H-160 Z"/>
+                  </g>
+                  <!-- eroded wedge: area under the pre-storm profile, then the post-storm sand painted over it -->
+                  <path class="beach__wedge" d="M0 76 H104 C150 76 180 120 214 152 C250 186 310 190 360 202 C440 220 540 238 640 250 V320 H0 Z"/>
+                  <path class="beach__sand" d="M0 76 H86 C98 76 100 112 110 140 C126 184 190 196 250 208 C340 226 520 242 640 254 V320 H0 Z"/>
+                  <!-- profiles -->
+                  <path class="beach__post" d="M0 76 H86 C98 76 100 112 110 140 C126 184 190 196 250 208 C340 226 520 242 640 254"/>
+                  <path class="beach__pre" d="M0 76 H104 C150 76 180 120 214 152 C250 186 310 190 360 202 C440 220 540 238 640 250"/>
+                  <!-- survey points on the pre-storm profile -->
+                  <g class="beach__surveys">
+                    <circle cx="40" cy="76" r="3"/>
+                    <circle cx="104" cy="76" r="3"/>
+                    <circle cx="146" cy="88" r="3"/>
+                    <circle cx="184" cy="119" r="3"/>
+                    <circle cx="214" cy="152" r="3"/>
+                    <circle cx="262" cy="183" r="3"/>
+                    <circle cx="310" cy="191" r="3"/>
+                    <circle cx="360" cy="202" r="3"/>
+                    <circle cx="420" cy="215" r="3"/>
+                    <circle cx="480" cy="227" r="3"/>
+                    <circle cx="540" cy="238" r="3"/>
+                    <circle cx="600" cy="245" r="3"/>
+                  </g>
+                  <!-- labels -->
+                  <g class="beach__labels">
+                    <text x="20" y="58">Dune</text>
+                    <text x="560" y="196" text-anchor="end">Sea</text>
+                    <text x="236" y="248">Eroded volume</text>
+                    <text x="632" y="28" text-anchor="end">pre-storm ——  post-storm - - -</text>
+                  </g>
+                </svg>
+              </div>
+              <figcaption>Stylised beach cross-section: pre-storm (solid) and post-storm (dashed) profiles, the eroded volume between them, and survey points along the beach.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 03 GENETIC ENGINEERING CNN ========== -->
+      <section class="section project" aria-labelledby="p3-title">
+        <div class="project__index" aria-hidden="true" data-parallax="-0.06">03</div>
+        <div class="container project__inner">
+          <div class="project__text">
+            <p class="eyebrow reveal" style="--i:0">03 — Project · Deep learning, 1-D convolutional network</p>
+            <h2 id="p3-title" class="project__title reveal" style="--i:1">Genetic engineering CNN</h2>
+            <p class="project__subtitle reveal" style="--i:2">Finding the lab of origin of plasmids with a convolutional neural network</p>
+            <div class="project__summary reveal" style="--i:3">
+              <p>Participation in a machine-learning challenge organised by drivendata.org on genetic engineering attribution. It follows A.A.K. Nielsen's approach of using a convolutional neural network to find the root laboratory of a plasmid of unknown origin.</p>
+              <p>DNA sequences are one-hot encoded over the four nucleotides and classified with a 1-D CNN. The challenge metric was top-10 accuracy.</p>
+            </div>
+            <ul class="stats reveal" style="--i:4">
+              <li class="stat">
+                <span class="stat__value count" data-target="500" data-suffix=" bp" aria-live="off">500 bp</span>
+                <span class="stat__label">sequence window</span>
+              </li>
+              <li class="stat">
+                <span class="stat__value count" data-target="256" aria-live="off">256</span>
+                <span class="stat__label">convolution filters</span>
+              </li>
+              <li class="stat">
+                <span class="stat__value count" data-target="4" aria-live="off">4</span>
+                <span class="stat__label">one-hot channels (A,&nbsp;T,&nbsp;G,&nbsp;C)</span>
+              </li>
+            </ul>
+            <p class="project__links reveal" style="--i:5">
+              <a class="link-arrow" href="https://github.com/env-models/Genetic_engineering" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+              <a class="link-arrow" href="https://nbviewer.org/github/env-models/Genetic_engineering/blob/main/gen_eng_final.ipynb" target="_blank" rel="noopener noreferrer">Notebook</a>
+            </p>
+          </div>
+          <div class="project__visual" data-parallax="0.07">
+            <figure class="figure reveal" style="--i:2">
+              <div class="figure-card figure-card--dark">
+                <svg class="dna" viewBox="0 0 640 176" role="img" aria-labelledby="dna-title dna-desc" xmlns="http://www.w3.org/2000/svg">
+                  <title id="dna-title">One-hot encoded DNA sequence</title>
+                  <desc id="dna-desc">A strip of thirty nucleotides, each column lit in one of four rows (A, T, G, C), with a sliding convolution window.</desc>
+                  <defs>
+                    <pattern id="dna-cells" width="20" height="28" patternUnits="userSpaceOnUse" patternTransform="translate(40 48)">
+                      <rect width="16" height="24" rx="3" class="dna__cell"/>
+                    </pattern>
+                  </defs>
+                  <g class="dna__letters">
+                    <text x="48" y="30" text-anchor="middle">A</text>
+                    <text x="68" y="30" text-anchor="middle">T</text>
+                    <text x="88" y="30" text-anchor="middle">G</text>
+                    <text x="108" y="30" text-anchor="middle">C</text>
+                    <text x="128" y="30" text-anchor="middle">G</text>
+                    <text x="148" y="30" text-anchor="middle">T</text>
+                    <text x="168" y="30" text-anchor="middle">A</text>
+                    <text x="188" y="30" text-anchor="middle">C</text>
+                    <text x="208" y="30" text-anchor="middle">C</text>
+                    <text x="228" y="30" text-anchor="middle">G</text>
+                    <text x="248" y="30" text-anchor="middle">A</text>
+                    <text x="268" y="30" text-anchor="middle">T</text>
+                    <text x="288" y="30" text-anchor="middle">T</text>
+                    <text x="308" y="30" text-anchor="middle">G</text>
+                    <text x="328" y="30" text-anchor="middle">A</text>
+                    <text x="348" y="30" text-anchor="middle">C</text>
+                    <text x="368" y="30" text-anchor="middle">G</text>
+                    <text x="388" y="30" text-anchor="middle">G</text>
+                    <text x="408" y="30" text-anchor="middle">T</text>
+                    <text x="428" y="30" text-anchor="middle">A</text>
+                    <text x="448" y="30" text-anchor="middle">C</text>
+                    <text x="468" y="30" text-anchor="middle">A</text>
+                    <text x="488" y="30" text-anchor="middle">G</text>
+                    <text x="508" y="30" text-anchor="middle">T</text>
+                    <text x="528" y="30" text-anchor="middle">C</text>
+                    <text x="548" y="30" text-anchor="middle">A</text>
+                    <text x="568" y="30" text-anchor="middle">T</text>
+                    <text x="588" y="30" text-anchor="middle">G</text>
+                    <text x="608" y="30" text-anchor="middle">C</text>
+                    <text x="628" y="30" text-anchor="middle">A</text>
+                  </g>
+                  <g class="dna__labels">
+                    <text x="26" y="64" text-anchor="middle">A</text>
+                    <text x="26" y="92" text-anchor="middle">T</text>
+                    <text x="26" y="120" text-anchor="middle">G</text>
+                    <text x="26" y="148" text-anchor="middle">C</text>
+                  </g>
+                  <rect x="40" y="48" width="600" height="112" fill="url(#dna-cells)"/>
+                  <g class="dna__hot">
+                    <rect x="40" y="48" width="16" height="24" rx="3"/>
+                    <rect x="60" y="76" width="16" height="24" rx="3"/>
+                    <rect x="80" y="104" width="16" height="24" rx="3"/>
+                    <rect x="100" y="132" width="16" height="24" rx="3"/>
+                    <rect x="120" y="104" width="16" height="24" rx="3"/>
+                    <rect x="140" y="76" width="16" height="24" rx="3"/>
+                    <rect x="160" y="48" width="16" height="24" rx="3"/>
+                    <rect x="180" y="132" width="16" height="24" rx="3"/>
+                    <rect x="200" y="132" width="16" height="24" rx="3"/>
+                    <rect x="220" y="104" width="16" height="24" rx="3"/>
+                    <rect x="240" y="48" width="16" height="24" rx="3"/>
+                    <rect x="260" y="76" width="16" height="24" rx="3"/>
+                    <rect x="280" y="76" width="16" height="24" rx="3"/>
+                    <rect x="300" y="104" width="16" height="24" rx="3"/>
+                    <rect x="320" y="48" width="16" height="24" rx="3"/>
+                    <rect x="340" y="132" width="16" height="24" rx="3"/>
+                    <rect x="360" y="104" width="16" height="24" rx="3"/>
+                    <rect x="380" y="104" width="16" height="24" rx="3"/>
+                    <rect x="400" y="76" width="16" height="24" rx="3"/>
+                    <rect x="420" y="48" width="16" height="24" rx="3"/>
+                    <rect x="440" y="132" width="16" height="24" rx="3"/>
+                    <rect x="460" y="48" width="16" height="24" rx="3"/>
+                    <rect x="480" y="104" width="16" height="24" rx="3"/>
+                    <rect x="500" y="76" width="16" height="24" rx="3"/>
+                    <rect x="520" y="132" width="16" height="24" rx="3"/>
+                    <rect x="540" y="48" width="16" height="24" rx="3"/>
+                    <rect x="560" y="76" width="16" height="24" rx="3"/>
+                    <rect x="580" y="104" width="16" height="24" rx="3"/>
+                    <rect x="600" y="132" width="16" height="24" rx="3"/>
+                    <rect x="620" y="48" width="16" height="24" rx="3"/>
+                  </g>
+                  <rect class="dna__window" x="36" y="12" width="104" height="148" rx="8"/>
+                </svg>
+              </div>
+              <figcaption>One-hot encoding of a DNA fragment: each nucleotide lights one of four channels, and a convolution window slides along the sequence.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ========== PUBLICATIONS ========== -->
+    <section class="section section--pubs" id="publications" aria-labelledby="pubs-title">
+      <div class="container">
+        <p class="eyebrow reveal" style="--i:0">04 — Publications</p>
+        <h2 id="pubs-title" class="section-title reveal" style="--i:1">Publications</h2>
+        <ul class="pubs">
+          <li class="pub reveal" style="--i:2">
+            <span class="pub__year">2018</span>
+            <div class="pub__body">
+              <p class="pub__authors">Gillet R. et al.</p>
+              <p class="pub__title">Towards the development of a storm erosion Early Warning System for the French Aquitanian coast</p>
+              <p class="pub__venue">Proceedings from the International Coastal Symposium (ICS) 2018, Busan, Republic of Korea. Journal of Coastal Research.</p>
+            </div>
+          </li>
+          <li class="pub reveal" style="--i:3">
+            <span class="pub__year">2014</span>
+            <div class="pub__body">
+              <p class="pub__authors">Henaff Q., Arnaud-Fassetta G., Beltrando G., Gillet R.</p>
+              <p class="pub__title">A comparative hydro-morphometric approach for modelling rainfall variability impact during hydrological extremes: application to 2002 and 2003 catastrophic events in the Lower Rhône valley, France</p>
+              <p class="pub__venue">European Geosciences Union General Assembly, Vienna, Austria.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== CONTACT ========== -->
+  <footer class="footer" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <p class="eyebrow reveal" style="--i:0">05 — Contact</p>
+      <h2 id="contact-title" class="section-title reveal" style="--i:1">Contact</h2>
+      <ul class="contact-list reveal" style="--i:2">
+        <li><a class="link-arrow" href="https://github.com/env-models" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a class="link-arrow" href="https://www.linkedin.com/in/rapha%C3%ABl-g-20723514b/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:raphael.gillet1@gmail.com">Email</a></li>
+      </ul>
+      <p class="copyright">© 2026 Raphael Gillet</p>
+    </div>
+  </footer>
+
+  <script src="main.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+</body>
+</html>
